@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wisevu — Agency Departments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
     --blue: #487ab9;
@@ -41,7 +41,27 @@
     justify-content: space-between;
     box-shadow: 0 2px 20px rgba(26,58,107,0.4);
   }
-  .nav-logo img { height: 32px; width: auto; filter: brightness(0) invert(1); display: block; }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-style: italic;
+    color: white;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .nav-logo sup {
+    font-size: 0.4rem;
+    font-weight: 400;
+    font-style: normal;
+    vertical-align: top;
+    line-height: 1;
+    opacity: 0.7;
+    margin-left: 2px;
+    margin-top: 2px;
+  }
   .nav-tag {
     font-size: 0.75rem;
     color: rgba(255,255,255,0.5);
@@ -348,7 +368,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><img src="https://www.wisevu.com/images/wisevu-internet-marketing-logo.svg" alt="Wisevu"></div>
+  <div class="nav-logo">WV</div>
   <div class="nav-tag">Internal Operations</div>
 </nav>
 
