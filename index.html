@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wisevu — Agency Departments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #487ab9;
+    --blue-dark: #2d5a96;
+    --blue-deep: #1a3a6b;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c5d8f5;
+    --white: #ffffff;
+    --off-white: #f7f9fc;
+    --gray-light: #eef2f8;
+    --gray: #8899b4;
+    --text: #1a2540;
+    --text-muted: #5a6a84;
+    --accent: #f0a500;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-deep);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.4);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); }
+  .nav-logo span { color: var(--accent); }
+  .nav-tag {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 100%);
+    padding: 100px 48px 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(240,165,0,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.65); }
+  .hero p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 16px 24px;
+    min-width: 120px;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: white;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── MAIN ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 72px 32px 80px; }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .section-heading {
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--blue-deep);
+    margin-bottom: 12px;
+  }
+  .section-sub {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 52px;
+    line-height: 1.65;
+  }
+
+  /* ── DEPARTMENT CARDS ── */
+  .dept-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-bottom: 60px;
+  }
+  .color-indigo { background: linear-gradient(135deg, #1e1b4b, #3730a3); }
+
+  .dept-card {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid var(--blue-mid);
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(72,122,185,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .dept-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(72,122,185,0.18);
+  }
+
+  .dept-card-top {
+    padding: 36px 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dept-card-top::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 140px; height: 140px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+
+  .color-blue   { background: linear-gradient(135deg, var(--blue-deep), var(--blue)); }
+  .color-green  { background: linear-gradient(135deg, #1a4d3a, #2a7a5a); }
+  .color-purple { background: linear-gradient(135deg, #2d1b69, #6d28d9); }
+  .color-orange { background: linear-gradient(135deg, #7c2d12, #c2410c); }
+
+  .dept-icon {
+    width: 56px; height: 56px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+  .dept-card-top h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .dept-card-top p {
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dept-card-bottom {
+    padding: 24px 32px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .dept-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .tag {
+    background: var(--blue-light);
+    color: var(--blue-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  .dept-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-light);
+  }
+  .dept-capacity {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .dept-capacity strong { color: var(--blue-dark); font-weight: 700; }
+
+  .dept-cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 0.02em;
+  }
+  .dept-cta svg { transition: transform 0.2s; }
+  .dept-card:hover .dept-cta svg { transform: translateX(4px); }
+
+  /* ── COMING SOON ── */
+  .dept-card.coming-soon {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .coming-badge {
+    display: inline-block;
+    background: var(--accent-light, #fff8e6);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(240,165,0,0.3);
+  }
+
+  /* ── INFO STRIP ── */
+  .info-strip {
+    background: var(--blue-deep);
+    border-radius: 16px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  .info-item { }
+  .info-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: white;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .info-num span { color: var(--accent); }
+  .info-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.04em; }
+  .info-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 auto;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 0.82rem;
+    margin-top: 0;
+  }
+  footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 70px 24px 60px; }
+    .page { padding: 52px 20px 60px; }
+    .dept-grid { grid-template-columns: 1fr; }
+    .info-strip { grid-template-columns: 1fr; gap: 28px; }
+    .info-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">wise<span>vu</span></div>
+  <div class="nav-tag">Internal Operations</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Agency Scaling Playbook</div>
+    <h1>How <em>Wisevu</em><br>Operates at Scale</h1>
+    <p>Department-by-department structure, responsibilities, and deliverables — built for 100 to 400+ clients.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Departments</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100<span>+</span></div>
+        <div class="stat-label">Clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Service Areas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="page">
+
+  <div class="section-label">Departments</div>
+  <h2 class="section-heading">Choose a Department</h2>
+  <p class="section-sub">Each page covers the full structure — deliverables, responsibilities, monthly workflow, tools, and escalation paths.</p>
+
+  <div class="dept-grid">
+
+    <!-- On-Page SEO -->
+    <a href="onpage-seo-department.html" class="dept-card">
+      <div class="dept-card-top color-blue">
+        <div class="dept-icon">🔍</div>
+        <h2>On-Page SEO</h2>
+        <p>Technical audits, keyword optimization, content strategy, schema markup, and Core Web Vitals.</p>
+      </div>
+      <div class="dept-card-bottom">
+        <div class="dept-tags">
+          <span class="tag">Technical Audits</span>
+          <span class="tag">On-Page Optimization</span>
+          <span class="tag">Schema</span>
+          <span class="tag">Core Web Vitals</span>
+          <span class="tag">Content Strategy</span>
+        </div>
+        <div class="dept-meta">
+          <div class="dept-capacity">Up to <strong>70 clients</strong> per specialist</div>
+          <div class="dept-cta">View Department <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Local SEO / GBP -->
+    <a href="local-seo-gbp-department.html" class="dept-card">
+      <div class="dept-card-top color-green">
+        <div class="dept-icon">📍</div>
+        <h2>Local SEO & GBP</h2>
+        <p>Google Business Profile management, citation building, review monitoring, and local rank tracking.</p>
+      </div>
+      <div class="dept-card-bottom">
+        <div class="dept-tags">
+          <span class="tag">GBP Optimization</span>
+          <span class="tag">Citations</span>
+          <span class="tag">Review Management</span>
+          <span class="tag">Competitor Reporting</span>
+          <span class="tag">BrightLocal</span>
+        </div>
+        <div class="dept-meta">
+          <div class="dept-capacity">Up to <strong>50 clients</strong> per specialist</div>
+          <div class="dept-cta">View Department <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Content -->
+    <a href="content-department.html" class="dept-card">
+      <div class="dept-card-top color-purple">
+        <div class="dept-icon">✍️</div>
+        <h2>Content</h2>
+        <p>Blog posts, service pages, location pages, content refreshes, and meta titles & descriptions.</p>
+      </div>
+      <div class="dept-card-bottom">
+        <div class="dept-tags">
+          <span class="tag">Blog Posts</span>
+          <span class="tag">Service Pages</span>
+          <span class="tag">Location Pages</span>
+          <span class="tag">Content Refreshes</span>
+          <span class="tag">Meta Data</span>
+        </div>
+        <div class="dept-meta">
+          <div class="dept-capacity">Up to <strong>30 clients</strong> per writer</div>
+          <div class="dept-cta">View Department <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Link Building -->
+    <a href="link-building-department.html" class="dept-card">
+      <div class="dept-card-top color-orange">
+        <div class="dept-icon">🔗</div>
+        <h2>Link Building</h2>
+        <p>Manual outreach campaigns, PitchBox management, guest posts, HARO / PR placements, and link acquisition reporting.</p>
+      </div>
+      <div class="dept-card-bottom">
+        <div class="dept-tags">
+          <span class="tag">PitchBox</span>
+          <span class="tag">Guest Posts</span>
+          <span class="tag">HARO / PR</span>
+          <span class="tag">Ahrefs</span>
+          <span class="tag">Hunter.io</span>
+        </div>
+        <div class="dept-meta">
+          <div class="dept-capacity">Up to <strong>10 clients</strong> per link builder</div>
+          <div class="dept-cta">View Department <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Account Management -->
+    <a href="account-management-department.html" class="dept-card" style="grid-column: 1 / -1;">
+      <div class="dept-card-top color-indigo">
+        <div class="dept-icon">🤝</div>
+        <h2>Account Management</h2>
+        <p>Client onboarding, monthly consolidated reporting, cross-department coordination, deliverable review, upselling, retention, and escalation management.</p>
+      </div>
+      <div class="dept-card-bottom">
+        <div class="dept-tags">
+          <span class="tag">Client Onboarding</span>
+          <span class="tag">Monthly Reporting</span>
+          <span class="tag">Retention</span>
+          <span class="tag">Escalation Management</span>
+          <span class="tag">Upselling</span>
+          <span class="tag">Cross-Department Coordination</span>
+        </div>
+        <div class="dept-meta">
+          <div class="dept-capacity">Up to <strong>30 clients</strong> per Account Manager</div>
+          <div class="dept-cta">View Department <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Info strip -->
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="info-num">1<span>×</span></div>
+      <div class="info-label">Monthly reporting cycle across all departments</div>
+    </div>
+    <div class="info-divider"></div>
+    <div class="info-item">
+      <div class="info-num">50<span>–70</span></div>
+      <div class="info-label">Clients per specialist at scale</div>
+    </div>
+    <div class="info-divider"></div>
+    <div class="info-item">
+      <div class="info-num">400<span>+</span></div>
+      <div class="info-label">Client capacity with full team structure</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Wisevu</strong> &nbsp;·&nbsp; Internal Agency Operations — Department Reference Hub
+</footer>
+
+</body>
+</html>

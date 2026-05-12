@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Link Building Department — Wisevu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #487ab9;
+    --blue-dark: #2d5a96;
+    --blue-deep: #1a3a6b;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c5d8f5;
+    --white: #ffffff;
+    --off-white: #f7f9fc;
+    --gray-light: #eef2f8;
+    --gray: #8899b4;
+    --text: #1a2540;
+    --text-muted: #5a6a84;
+    --accent: #f0a500;
+    --accent-light: #fff8e6;
+    --orange: #c2410c;
+    --orange-light: #fff7ed;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.65; font-size: 16px; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-deep);
+    padding: 18px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.4);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 4px; transition: all 0.2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.12); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 60%, #6fa0d8 100%);
+    padding: 90px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -60px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(72,122,185,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; position: relative; z-index: 1; }
+  .hero-label {
+    display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+  .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 620px; font-weight: 300; margin-bottom: 40px; }
+  .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .stat { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 18px 28px; backdrop-filter: blur(8px); }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-top: 72px; animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-num {
+    width: 44px; height: 44px; background: var(--blue); color: white; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 1.2rem; flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(72,122,185,0.4);
+  }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 1.85rem; color: var(--blue-deep); line-height: 1.2; }
+
+  /* ── DATA TABLE ── */
+  .data-table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 20px rgba(72,122,185,0.1); }
+  .data-table thead tr { background: var(--blue-deep); color: white; }
+  .data-table thead th { padding: 14px 24px; text-align: left; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .data-table tbody tr { background: white; transition: background 0.15s; }
+  .data-table tbody tr:nth-child(even) { background: var(--gray-light); }
+  .data-table tbody tr:hover { background: var(--blue-light); }
+  .data-table tbody td { padding: 14px 24px; font-size: 0.92rem; border-bottom: 1px solid #e8edf5; color: var(--text); }
+  .data-table tbody td:first-child { font-weight: 600; color: var(--blue-dark); }
+  .data-table tfoot td { background: var(--accent-light); border-top: 2px solid var(--accent); padding: 14px 24px; font-size: 0.88rem; color: var(--text); font-style: italic; }
+
+  /* ── TACTIC CARDS ── */
+  .tactic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .tactic-card { background: white; border-radius: 16px; border: 1px solid var(--blue-mid); overflow: hidden; box-shadow: 0 2px 16px rgba(72,122,185,0.07); transition: transform 0.2s, box-shadow 0.2s; }
+  .tactic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(72,122,185,0.15); }
+  .tactic-header { padding: 22px 26px; display: flex; align-items: center; gap: 14px; }
+  .hdr-orange { background: var(--blue); }
+  .hdr-blue   { background: var(--blue); }
+  .hdr-deep   { background: var(--blue-deep); }
+  .tactic-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .tactic-header h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: white; line-height: 1.2; }
+  .tactic-header p { font-size: 0.76rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+  .tactic-body { padding: 22px 26px; }
+  .tactic-body ul { list-style: none; }
+  .tactic-body ul li { font-size: 0.88rem; color: var(--text-muted); padding: 7px 0 7px 20px; border-bottom: 1px solid var(--gray-light); position: relative; line-height: 1.5; }
+  .tactic-body ul li:last-child { border-bottom: none; }
+  .tactic-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 0.78rem; font-weight: 700; }
+
+  /* ── PITCHBOX PROCESS ── */
+  .pitchbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pb-card { background: white; border-radius: 14px; padding: 28px; border: 1px solid var(--blue-mid); box-shadow: 0 2px 16px rgba(72,122,185,0.06); }
+  .pb-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--blue-deep); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--blue-light); }
+  .pb-card ul { list-style: none; }
+  .pb-card ul li { font-size: 0.88rem; color: var(--text-muted); padding: 8px 0 8px 22px; border-bottom: 1px solid var(--gray-light); position: relative; line-height: 1.5; }
+  .pb-card ul li:last-child { border-bottom: none; }
+  .pb-card ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: var(--blue); border-radius: 50%; }
+  .pb-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── QUALITY STANDARDS ── */
+  .quality-banner {
+    background: linear-gradient(135deg, var(--blue-deep), #2d5a96);
+    border-radius: 16px; padding: 32px 36px; color: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    box-shadow: 0 4px 24px rgba(26,58,107,0.25);
+  }
+  .quality-banner h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 14px; color: white; }
+  .quality-banner ul { list-style: none; }
+  .quality-banner ul li { font-size: 0.87rem; color: rgba(255,255,255,0.8); padding: 7px 0 7px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; line-height: 1.5; }
+  .quality-banner ul li:last-child { border-bottom: none; }
+  .quality-banner ul li::before { content: '✦'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 10px; }
+  .q-label { display: inline-block; background: rgba(240,165,0,0.2); color: var(--accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; border: 1px solid rgba(240,165,0,0.3); }
+
+  /* ── WORKFLOW ── */
+  .workflow { background: white; border-radius: 16px; border: 1px solid var(--blue-mid); padding: 32px; box-shadow: 0 2px 16px rgba(72,122,185,0.06); }
+  .workflow-step { display: flex; gap: 20px; align-items: flex-start; padding-bottom: 28px; }
+  .workflow-step:last-child { padding-bottom: 0; }
+  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-dot { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; box-shadow: 0 3px 10px rgba(72,122,185,0.35); }
+  .step-line { width: 2px; flex: 1; background: var(--blue-mid); margin-top: 6px; min-height: 24px; }
+  .workflow-step:last-child .step-line { display: none; }
+  .step-content { padding-top: 8px; }
+  .step-title { font-weight: 700; font-size: 0.95rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .step-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── CAPACITY VISUAL ── */
+  .capacity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .cap-card { background: white; border-radius: 14px; padding: 28px 24px; border: 1px solid var(--blue-mid); text-align: center; box-shadow: 0 2px 12px rgba(72,122,185,0.06); }
+  .cap-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: var(--blue-deep); line-height: 1; margin-bottom: 6px; }
+  .cap-num span { color: var(--blue); font-size: 1.8rem; }
+  .cap-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; line-height: 1.4; }
+
+  /* ── TOOLS ── */
+  .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tool-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--blue-mid); box-shadow: 0 2px 12px rgba(72,122,185,0.06); transition: all 0.2s; text-align: center; }
+  .tool-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(72,122,185,0.15); }
+  .tool-emoji { font-size: 1.8rem; margin-bottom: 10px; }
+  .tool-name { font-weight: 700; font-size: 0.88rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .tool-purpose { font-size: 0.78rem; color: var(--gray); line-height: 1.4; }
+
+  /* ── ESCALATION ── */
+  .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .esc-row { background: white; border-radius: 12px; padding: 18px 22px; border-left: 4px solid var(--blue); display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 2px 10px rgba(72,122,185,0.06); transition: all 0.2s; }
+  .esc-row:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(72,122,185,0.12); }
+  .esc-issue { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .esc-badge { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+  .badge-dev    { background: var(--blue-light); color: var(--blue-dark); }
+  .badge-am     { background: #fef3e2; color: #a06000; }
+  .badge-onpage { background: #f3e8ff; color: #6b21a8; }
+  .badge-content { background: #e8f5e9; color: #2e7d32; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--blue-deep); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 32px; font-size: 0.82rem; margin-top: 80px; }
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 60px 20px 50px; }
+    .page { padding: 0 20px 60px; }
+    .tactic-grid, .pitchbox-grid, .quality-banner, .escalation-grid, .capacity-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">wise<span>vu</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#tactics">Tactics</a></li>
+    <li><a href="#pitchbox">PitchBox</a></li>
+    <li><a href="#quality">Quality</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#escalation">Escalation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Internal Department Reference</div>
+    <h1>Link Building<br><em>Department</em></h1>
+    <p>Structure, responsibilities, and monthly deliverables for building high-quality backlinks through manual outreach, guest posts, and HARO / PR campaigns using PitchBox and Ahrefs.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">10</div>
+        <div class="stat-label">Clients per link builder</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">20<span>–25</span></div>
+        <div class="stat-label">Backlinks per builder / month</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Core outreach tactics</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">Department Overview</h2>
+    </div>
+    <div style="background:white;border-radius:14px;padding:28px;border:1px solid var(--blue-mid);box-shadow:0 2px 16px rgba(72,122,185,0.06);margin-bottom:20px;">
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.75;">The Link Building Department is responsible for acquiring high-quality backlinks that increase each client's domain authority and organic rankings. All link building is manual — no PBNs, no link farms, no shortcuts. Each link builder manages 10 clients and is accountable for delivering 20–25 links per month across their entire client portfolio, using PitchBox for outreach management, Ahrefs for prospecting, and Hunter.io for contact discovery. The two primary tactics are guest posts and HARO / PR placements.</p>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Metric</th><th>Target / Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Clients per link builder</td><td>10</td></tr>
+        <tr><td>Links delivered per month</td><td>20–25 across all assigned clients</td></tr>
+        <tr><td>Links per client (starter plan)</td><td>2–3 per month (remainder handled by generalist SEOs)</td></tr>
+        <tr><td>Primary tactics</td><td>Guest posts, HARO / PR placements</td></tr>
+        <tr><td>Outreach platform</td><td>PitchBox</td></tr>
+        <tr><td>Prospecting tool</td><td>Ahrefs</td></tr>
+        <tr><td>Contact discovery</td><td>Hunter.io</td></tr>
+        <tr><td>Minimum link quality</td><td>DR 30+, relevant niche, real organic traffic</td></tr>
+        <tr><td>Reporting cadence</td><td>Monthly — links acquired, DR, anchor text, target URL</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">On clients with higher link targets (e.g. 5 links/month), the link builder handles the core outreach while the assigned SEO specialist contributes 2 additional links to hit the target.</td></tr></tfoot>
+    </table>
+  </div>
+
+  <!-- 2. TACTICS -->
+  <div class="section" id="tactics">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Link Building Tactics</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Two core tactics are used for all client link building. Each requires a different workflow, timeline, and skill set.</p>
+    <div class="tactic-grid">
+
+      <div class="tactic-card">
+        <div class="tactic-header hdr-orange">
+          <div class="tactic-icon">✍️</div>
+          <div>
+            <h3>Guest Posts</h3>
+            <p>Primary tactic — manual outreach to relevant blogs and publications</p>
+          </div>
+        </div>
+        <div class="tactic-body">
+          <ul>
+            <li>Use Ahrefs to identify relevant blogs and publications in the client's niche (e.g. dental, health, local business) with DR 30+ and real organic traffic</li>
+            <li>Filter out link farms, PBNs, and sites that clearly sell links en masse</li>
+            <li>Find editor or contributor contact details using Hunter.io</li>
+            <li>Build and load outreach sequences in PitchBox — personalized pitch per site, not a template blast</li>
+            <li>Pitch a guest post topic relevant to both the publication's audience and the client's services</li>
+            <li>Once accepted, write or brief the guest post (600–900 words) with one contextual link back to the client's target page</li>
+            <li>Use natural, varied anchor text — avoid exact-match anchors on every link</li>
+            <li>Follow up once if no response after 5–7 business days</li>
+            <li>Track accepted, rejected, and pending pitches in PitchBox pipeline</li>
+            <li>Confirm the link is live before logging it in the monthly report</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tactic-card">
+        <div class="tactic-header hdr-deep">
+          <div class="tactic-icon">📣</div>
+          <div>
+            <h3>HARO / PR Links</h3>
+            <p>Reactive outreach — responding to journalist and media requests</p>
+          </div>
+        </div>
+        <div class="tactic-body">
+          <ul>
+            <li>Monitor HARO (Help a Reporter Out) or equivalent PR platforms (Connectively, Qwoted) daily for relevant queries</li>
+            <li>Filter queries by relevance to the client's niche and expertise (e.g. a dentist answering dental health questions)</li>
+            <li>Draft concise, expert responses on behalf of the client — 150–300 words, specific and quotable</li>
+            <li>Include the client's name, title, and practice name in every response for attribution</li>
+            <li>Submit responses promptly — HARO queries have tight deadlines (often same-day)</li>
+            <li>Track all submitted responses and publication outcomes in PitchBox or a dedicated tracker</li>
+            <li>Follow up with the journalist if publication is expected but not confirmed within 2 weeks</li>
+            <li>HARO links typically come from high-DR news and media sites — prioritize these when available</li>
+            <li>Log confirmed live links with the publication name, DR, and link URL in the monthly report</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. PITCHBOX PROCESS -->
+  <div class="section" id="pitchbox">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">PitchBox Campaign Management</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">PitchBox is the central platform for all outreach. Each client has their own campaign. Here's how campaigns are set up and managed.</p>
+    <div class="pitchbox-grid">
+      <div class="pb-card">
+        <h3>Campaign Setup (New Clients)</h3>
+        <ul>
+          <li>Create a new PitchBox campaign for each client — named clearly by client and tactic (e.g. "Client Name — Guest Posts")</li>
+          <li>Import prospect list from Ahrefs export — filter for DR 30+, relevant niche, organic traffic above 500/mo</li>
+          <li>Enrich contact data using Hunter.io — find editor or contributor email addresses</li>
+          <li>Write 2–3 personalized email templates per campaign — vary subject lines and opening hooks</li>
+          <li>Set follow-up sequence: initial pitch → follow-up at day 6 → close at day 12</li>
+          <li>Review all templates before activating — no generic or spammy language</li>
+        </ul>
+      </div>
+      <div class="pb-card">
+        <h3>Ongoing Campaign Management</h3>
+        <ul>
+          <li>Check PitchBox daily for replies, acceptances, and rejections</li>
+          <li>Move accepted pitches to "In Progress" and begin content or response drafting immediately</li>
+          <li>Log rejections and unsubscribes — do not re-pitch the same contact</li>
+          <li>Replenish prospect lists monthly — add 30–50 new prospects per client per month to keep pipeline healthy</li>
+          <li>Monitor email deliverability — watch for bounce rates and spam folder placements</li>
+          <li>Archive completed campaigns and start fresh quarterly to avoid list fatigue</li>
+        </ul>
+      </div>
+      <div class="pb-card">
+        <h3>Prospect Research Standards</h3>
+        <ul>
+          <li>Use Ahrefs Site Explorer to vet every prospect before outreach</li>
+          <li>Minimum DR 30 — exceptions only for highly relevant niche sites with strong editorial standards</li>
+          <li>Must have real organic traffic — reject sites with zero or suspiciously flat traffic graphs</li>
+          <li>Check for link spam indicators: excessive outbound links, thin content, unrelated niches</li>
+          <li>Prioritize sites that have published similar guest posts recently — signals active editorial</li>
+          <li>Never prospect sites already linking to the client — check existing backlink profile first</li>
+        </ul>
+      </div>
+      <div class="pb-card">
+        <h3>Anchor Text Strategy</h3>
+        <ul>
+          <li>Vary anchor text across every link built — never repeat the same anchor for the same client</li>
+          <li>Anchor text distribution target: 40% branded, 30% partial match, 20% natural/generic, 10% exact match</li>
+          <li>Review the client's existing backlink profile in Ahrefs before deciding anchor text — fill gaps, don't duplicate</li>
+          <li>Avoid over-optimized anchors like "best dentist Toronto" on every link — triggers Penguin risk</li>
+          <li>Document every anchor used in the monthly link report</li>
+          <li>Flag to On-Page SEO team if target URLs need to be updated based on ranking priorities</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. QUALITY STANDARDS -->
+  <div class="section" id="quality">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">Link Quality Standards</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">Every link built must meet these standards before being logged. Quality over quantity — a few strong links outperform dozens of weak ones.</p>
+    <div class="quality-banner">
+      <div>
+        <div class="q-label">✅ Accepted links</div>
+        <h3>What qualifies</h3>
+        <ul>
+          <li>DR 30 or above (Ahrefs Domain Rating)</li>
+          <li>Real organic traffic — verified in Ahrefs Site Explorer</li>
+          <li>Topically relevant to the client's industry or services</li>
+          <li>Contextual placement — link is within body content, not footer or sidebar</li>
+          <li>Dofollow link (nofollow acceptable only for high-DR media/PR placements)</li>
+          <li>Site has editorial standards — not a link farm or paid link directory</li>
+          <li>Link points to a relevant page on the client's site, not just the homepage</li>
+        </ul>
+      </div>
+      <div>
+        <div class="q-label" style="background:rgba(239,68,68,0.2);color:#fca5a5;border-color:rgba(239,68,68,0.3);">⚠️ Rejected links</div>
+        <h3>What does not qualify</h3>
+        <ul>
+          <li>DR below 30 unless exceptional editorial relevance</li>
+          <li>Zero or fake organic traffic</li>
+          <li>Sites with excessive outbound links on every page</li>
+          <li>Private blog networks (PBNs) — immediate disqualification</li>
+          <li>Unrelated niches (e.g. a gambling site linking to a dental clinic)</li>
+          <li>Sitewide links in footers, widgets, or navigation</li>
+          <li>Paid links disclosed as sponsored without nofollow attribute</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. CAPACITY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2 class="section-title">Capacity & Output Model</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Each link builder's monthly output of 20–25 links is distributed across 10 clients. Higher-plan clients receive more links; starter plan clients share the builder's output with the generalist SEO team.</p>
+    <div class="capacity-grid">
+      <div class="cap-card">
+        <div class="cap-num">10</div>
+        <div class="cap-label">Clients per link builder</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">20<span>–25</span></div>
+        <div class="cap-label">Total links built per month across all clients</div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">2<span>–3</span></div>
+        <div class="cap-label">Links per starter plan client per month</div>
+      </div>
+    </div>
+    <div style="background:white;border-radius:14px;padding:24px 28px;border:1px solid var(--blue-mid);margin-top:20px;box-shadow:0 2px 12px rgba(72,122,185,0.06);">
+      <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.75;"><strong style="color:var(--blue-dark);">Hybrid model:</strong> On clients requiring 5+ links per month, the link builder targets 3 links via PitchBox outreach while the assigned generalist SEO specialist contributes 2 additional links. This keeps the link builder's pipeline focused while ensuring client targets are always met. The link builder tracks all links — including the SEO's contribution — in the monthly report.</p>
+    </div>
+  </div>
+
+  <!-- 6. WORKFLOW -->
+  <div class="section" id="workflow">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2 class="section-title">Monthly Workflow</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Link building is an ongoing pipeline — not a one-time task. The workflow below keeps outreach consistent and links flowing every month.</p>
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Pipeline Review & Prospect Refresh (Week 1)</div>
+          <div class="step-desc">Review all active PitchBox campaigns. Check reply rates, bounce rates, and pipeline health. Add 30–50 new prospects per client using Ahrefs — keeping the pipeline full is the most important ongoing task. Enrich new prospects with Hunter.io contact data.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">HARO Monitoring (Daily — all 4 weeks)</div>
+          <div class="step-desc">Check HARO / Connectively every morning for relevant queries across all 10 clients. Draft and submit expert responses for matching queries on the same day — HARO is time-sensitive. Log all submissions in the tracker. This runs in parallel with everything else throughout the month.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Outreach Activation & Follow-Ups (Week 1–2)</div>
+          <div class="step-desc">Send new outreach batches for guest post campaigns. Follow up on pitches from the prior month that haven't received a response. Move accepted pitches to active status and begin drafting or commissioning guest post content immediately.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Guest Post Content & Submission (Week 2–3)</div>
+          <div class="step-desc">Write or brief guest post content for all accepted pitches. Each post is 600–900 words, genuinely useful to the publication's audience, with one natural contextual link back to the client's target page. Submit to the editor and track submission status in PitchBox.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">5</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Link Verification (Week 3–4)</div>
+          <div class="step-desc">Confirm all expected links are live. Check each URL directly and verify in Ahrefs that the link has been indexed. If a promised link hasn't gone live, follow up with the editor. Never log a link as delivered until it is confirmed live and crawlable.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">6</div></div>
+        <div class="step-content">
+          <div class="step-title">Monthly Link Report (Week 4)</div>
+          <div class="step-desc">Compile the monthly link report for all 10 clients. Each report includes: live links acquired, referring domain, DR, anchor text used, target URL, and link type (guest post or HARO). Submit to Account Managers for client delivery. Flag any clients who fell short of their target with a reason and recovery plan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. TOOLS -->
+  <div class="section" id="tools">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2 class="section-title">Tools & Tech Stack</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-emoji">📬</div>
+        <div class="tool-name">PitchBox</div>
+        <div class="tool-purpose">Outreach campaigns, pipeline management, follow-up sequences</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">Ahrefs</div>
+        <div class="tool-purpose">Prospect research, DR vetting, backlink profile analysis</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔎</div>
+        <div class="tool-name">Hunter.io</div>
+        <div class="tool-purpose">Editor and contributor email discovery</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📣</div>
+        <div class="tool-name">HARO / Connectively</div>
+        <div class="tool-purpose">Journalist query monitoring for PR link opportunities</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📄</div>
+        <div class="tool-name">Google Docs</div>
+        <div class="tool-purpose">Guest post drafting and editor collaboration</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📋</div>
+        <div class="tool-name">ClickUp / Asana</div>
+        <div class="tool-purpose">Monthly task tracking per client</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔗</div>
+        <div class="tool-name">Ahrefs Alerts</div>
+        <div class="tool-purpose">New backlink notifications and lost link monitoring</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📈</div>
+        <div class="tool-name">Google Search Console</div>
+        <div class="tool-purpose">Monitoring link impact on rankings and traffic</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ESCALATION -->
+  <div class="section" id="escalation">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2 class="section-title">Escalation Protocol</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">Link builders own outreach and link acquisition. Anything beyond that scope is escalated immediately.</p>
+    <div class="escalation-grid">
+      <div class="esc-row">
+        <div class="esc-issue">Client falls short of monthly link target</div>
+        <span class="esc-badge badge-am">Account Manager — flag with recovery plan</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Guest post content needs writing beyond builder's capacity</div>
+        <span class="esc-badge badge-content">Content Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Target page needs optimization before link building</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client receives a toxic or spammy backlink</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team — disavow file</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client questions link quality or strategy</div>
+        <span class="esc-badge badge-am">Account Manager</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Live link is removed after being reported</div>
+        <span class="esc-badge badge-am">Account Manager — note in next report</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">PitchBox deliverability issues (emails going to spam)</div>
+        <span class="esc-badge badge-dev">Team Lead / Tech Support</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client wants a different link building strategy</div>
+        <span class="esc-badge badge-am">Account Manager + Team Lead</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Wisevu</strong> &nbsp;·&nbsp; Link Building Department — Internal Reference Document
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0s';
+        entry.target.style.opacity = '1';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => { s.style.opacity = '0'; observer.observe(s); });
+</script>
+</body>
+</html>

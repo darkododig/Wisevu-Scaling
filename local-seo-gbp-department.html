@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local SEO & GBP Department — Wisevu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #487ab9;
+    --blue-dark: #2d5a96;
+    --blue-deep: #1a3a6b;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c5d8f5;
+    --white: #ffffff;
+    --off-white: #f7f9fc;
+    --gray-light: #eef2f8;
+    --gray: #8899b4;
+    --text: #1a2540;
+    --text-muted: #5a6a84;
+    --accent: #f0a500;
+    --accent-light: #fff8e6;
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-deep);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.4);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--white);
+    letter-spacing: 0.01em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.12); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, #2a6099 50%, #3d8b6e 100%);
+    padding: 90px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(46,125,50,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; position: relative; z-index: 1; }
+  .hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+  .hero p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.8);
+    max-width: 620px;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .stat {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 18px 28px;
+    backdrop-filter: blur(8px);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-top: 72px;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-num {
+    width: 44px; height: 44px;
+    background: var(--blue);
+    color: white;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(72,122,185,0.4);
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.85rem;
+    color: var(--blue-deep);
+    line-height: 1.2;
+  }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(72,122,185,0.1);
+  }
+  .data-table thead tr { background: var(--blue-deep); color: white; }
+  .data-table thead th {
+    padding: 14px 24px;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .data-table tbody tr { background: white; transition: background 0.15s; }
+  .data-table tbody tr:nth-child(even) { background: var(--gray-light); }
+  .data-table tbody tr:hover { background: var(--blue-light); }
+  .data-table tbody td {
+    padding: 14px 24px;
+    font-size: 0.92rem;
+    border-bottom: 1px solid #e8edf5;
+    color: var(--text);
+  }
+  .data-table tbody td:first-child { font-weight: 600; color: var(--blue-dark); }
+  .data-table tfoot td {
+    background: var(--accent-light);
+    border-top: 2px solid var(--accent);
+    padding: 14px 24px;
+    font-size: 0.88rem;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* ── GBP SERVICE CARDS ── */
+  .gbp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 8px;
+  }
+  .gbp-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--blue-mid);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(72,122,185,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .gbp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(72,122,185,0.15);
+  }
+  .gbp-card-header {
+    background: var(--blue);
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .gbp-card-header.green { background: #2a7a5a; }
+  .gbp-card-header.teal  { background: #1f6e8c; }
+  .gbp-icon {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .gbp-card-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: white;
+    line-height: 1.2;
+  }
+  .gbp-card-header p {
+    font-size: 0.74rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+  .gbp-body { padding: 18px 22px; }
+  .gbp-body ul { list-style: none; }
+  .gbp-body ul li {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    padding: 6px 0 6px 18px;
+    border-bottom: 1px solid var(--gray-light);
+    position: relative;
+    line-height: 1.5;
+  }
+  .gbp-body ul li:last-child { border-bottom: none; }
+  .gbp-body ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  /* ── CITATION SECTION ── */
+  .citation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .citation-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid var(--blue-mid);
+    box-shadow: 0 2px 16px rgba(72,122,185,0.06);
+  }
+  .citation-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--blue-deep);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-light);
+  }
+  .citation-card ul { list-style: none; }
+  .citation-card ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 8px 0 8px 22px;
+    border-bottom: 1px solid var(--gray-light);
+    position: relative;
+  }
+  .citation-card ul li:last-child { border-bottom: none; }
+  .citation-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+  .citation-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── WORKFLOW TIMELINE ── */
+  .workflow {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--blue-mid);
+    padding: 32px;
+    box-shadow: 0 2px 16px rgba(72,122,185,0.06);
+  }
+  .workflow-steps { display: flex; flex-direction: column; gap: 0; }
+  .workflow-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 28px;
+  }
+  .workflow-step:last-child { padding-bottom: 0; }
+  .workflow-step:last-child .step-line { display: none; }
+  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-dot {
+    width: 40px; height: 40px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(72,122,185,0.35);
+  }
+  .step-line {
+    width: 2px;
+    flex: 1;
+    background: var(--blue-mid);
+    margin-top: 6px;
+    min-height: 24px;
+  }
+  .step-content { padding-top: 8px; }
+  .step-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--blue-dark);
+    margin-bottom: 4px;
+  }
+  .step-desc {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* ── TOOLS ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .tool-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--blue-mid);
+    box-shadow: 0 2px 12px rgba(72,122,185,0.06);
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .tool-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(72,122,185,0.15);
+  }
+  .tool-emoji { font-size: 1.8rem; margin-bottom: 10px; }
+  .tool-name { font-weight: 700; font-size: 0.88rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .tool-purpose { font-size: 0.78rem; color: var(--gray); line-height: 1.4; }
+
+  /* ── REPORTING ── */
+  .report-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .report-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid var(--blue-mid);
+    box-shadow: 0 2px 16px rgba(72,122,185,0.06);
+  }
+  .report-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--blue-deep);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-light);
+  }
+  .report-card ul { list-style: none; }
+  .report-card ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 8px 0 8px 22px;
+    border-bottom: 1px solid var(--gray-light);
+    position: relative;
+  }
+  .report-card ul li:last-child { border-bottom: none; }
+  .report-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+  .report-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── ESCALATION ── */
+  .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .esc-row {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    border-left: 4px solid var(--blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 10px rgba(72,122,185,0.06);
+    transition: all 0.2s;
+  }
+  .esc-row:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(72,122,185,0.12); }
+  .esc-issue { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .esc-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .badge-dev   { background: var(--blue-light); color: var(--blue-dark); }
+  .badge-am    { background: #fef3e2; color: #a06000; }
+  .badge-onpage { background: #f3e8ff; color: #6b21a8; }
+  .badge-content { background: var(--green-light); color: var(--green); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 0.82rem;
+    margin-top: 80px;
+  }
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 60px 20px 50px; }
+    .page { padding: 0 20px 60px; }
+    .gbp-grid { grid-template-columns: 1fr; }
+    .citation-grid, .report-grid, .escalation-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">wise<span>vu</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#gbp">GBP Services</a></li>
+    <li><a href="#citations">Citations</a></li>
+    <li><a href="#workflow">Monthly Workflow</a></li>
+    <li><a href="#reporting">Reporting</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#escalation">Escalation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Internal Department Reference</div>
+    <h1>Local SEO &<br><em>GBP Department</em></h1>
+    <p>Structure, responsibilities, and monthly deliverables for managing Google Business Profile optimization, citation building, and local search visibility at scale.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">50</div>
+        <div class="stat-label">Max clients per specialist</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">GBP service areas</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1<span>×mo</span></div>
+        <div class="stat-label">Reporting cadence</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">Department Overview</h2>
+    </div>
+    <div style="background:white;border-radius:14px;padding:28px;border:1px solid var(--blue-mid);box-shadow:0 2px 16px rgba(72,122,185,0.06);margin-bottom:20px;">
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.75;">The Local SEO & GBP Department owns all local search visibility for every client. This includes keeping Google Business Profiles fully optimized and active, maintaining accurate citations across all major directories, and monitoring the local competitive landscape. One specialist handles up to 50 clients using BrightLocal as the central platform for auditing, tracking, and reporting.</p>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Target / Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Clients per specialist</td><td>Up to 50</td></tr>
+        <tr><td>Primary platform</td><td>BrightLocal (citations, rank tracking, reporting)</td></tr>
+        <tr><td>Reporting cadence</td><td>Monthly</td></tr>
+        <tr><td>GBP posting frequency</td><td>Minimum 1 post per month per client</td></tr>
+        <tr><td>Photo uploads</td><td>Minimum 1 photo per month per client</td></tr>
+        <tr><td>Escalation path</td><td>Account Manager for client complaints; On-Page team for website-level local SEO issues</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. GBP SERVICES -->
+  <div class="section" id="gbp">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">GBP Service Deliverables</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Six active service areas are included in every GBP management engagement, executed monthly per client.</p>
+    <div class="gbp-grid">
+
+      <div class="gbp-card">
+        <div class="gbp-card-header">
+          <div class="gbp-icon">📝</div>
+          <div>
+            <h3>GBP Posts</h3>
+            <p>Text + AI-generated image</p>
+          </div>
+        </div>
+        <div class="gbp-body">
+          <ul>
+            <li>Write one GBP post per client per month using AI assistance</li>
+            <li>Post copy tailored to the client's specialty (e.g. "We specialize in root canals — here's what to expect")</li>
+            <li>Generate a matching image using AI (ChatGPT / Midjourney) relevant to the post topic</li>
+            <li>Upload post + image directly to GBP</li>
+            <li>Use client-supplied photos when available; fall back to AI-generated or stock images</li>
+            <li>Review post performance (views, clicks) and adjust topics monthly</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gbp-card">
+        <div class="gbp-card-header green">
+          <div class="gbp-icon">❓</div>
+          <div>
+            <h3>Q&A Management</h3>
+            <p>Monitor, seed, and respond</p>
+          </div>
+        </div>
+        <div class="gbp-body">
+          <ul>
+            <li>Monitor the GBP Q&A section monthly for new questions from the public</li>
+            <li>Respond to unanswered questions within the reporting period</li>
+            <li>Seed 1–2 strategic Q&As per month using common patient/client questions</li>
+            <li>Ensure answers contain relevant local keywords naturally</li>
+            <li>Flag inappropriate or spam questions for removal via Google</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gbp-card">
+        <div class="gbp-card-header teal">
+          <div class="gbp-icon">⭐</div>
+          <div>
+            <h3>Review Monitoring & Responses</h3>
+            <p>Protect and build reputation</p>
+          </div>
+        </div>
+        <div class="gbp-body">
+          <ul>
+            <li>Monitor all new reviews via BrightLocal alerts</li>
+            <li>Draft and post responses to all new reviews — positive and negative</li>
+            <li>Escalate negative reviews (3 stars or below) to Account Manager before responding</li>
+            <li>Flag potentially fake or malicious reviews for client to dispute</li>
+            <li>Track review velocity (new reviews per month) and average star rating trend</li>
+            <li>Report on review count and rating changes in monthly report</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gbp-card">
+        <div class="gbp-card-header">
+          <div class="gbp-icon">🔍</div>
+          <div>
+            <h3>Competitor Reporting</h3>
+            <p>Local pack benchmarking</p>
+          </div>
+        </div>
+        <div class="gbp-body">
+          <ul>
+            <li>Identify 3–5 top local competitors appearing in the Google local pack for client's primary keywords</li>
+            <li>Track competitor review count and rating changes monthly</li>
+            <li>Note competitor GBP activity (new posts, new photos, new services)</li>
+            <li>Flag if a competitor gains a significant review or ranking advantage</li>
+            <li>Include competitive snapshot in monthly report</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gbp-card">
+        <div class="gbp-card-header green">
+          <div class="gbp-icon">📸</div>
+          <div>
+            <h3>Photo Uploads</h3>
+            <p>Visual presence maintenance</p>
+          </div>
+        </div>
+        <div class="gbp-body">
+          <ul>
+            <li>Upload minimum 1 new photo per client per month</li>
+            <li>Source photos from: client-supplied images, AI-generated visuals, or licensed stock</li>
+            <li>Ensure photos are correctly categorized (interior, exterior, team, product, etc.)</li>
+            <li>Add keyword-rich file names and alt descriptions before uploading</li>
+            <li>Monitor for user-uploaded photos that may be inappropriate — flag for removal</li>
+            <li>Track total photo count and monthly views in report</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gbp-card">
+        <div class="gbp-card-header teal">
+          <div class="gbp-icon">⚙️</div>
+          <div>
+            <h3>Service & Menu Updates</h3>
+            <p>Profile completeness & accuracy</p>
+          </div>
+        </div>
+        <div class="gbp-body">
+          <ul>
+            <li>Audit GBP profile completeness monthly — target 100% completion score</li>
+            <li>Update services list, descriptions, and pricing when changes are provided by client</li>
+            <li>Ensure business hours, holiday hours, and special hours are always current</li>
+            <li>Verify and update business categories — primary and secondary</li>
+            <li>Maintain accurate website URL, phone number, and address (NAP consistency)</li>
+            <li>Add or update service area pages if the client serves multiple locations</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. CITATION BUILDING -->
+  <div class="section" id="citations">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">Citation Building & Management</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Citations — consistent NAP (Name, Address, Phone) listings across directories — are a core local ranking factor. BrightLocal is used for auditing, building, and monitoring all citations.</p>
+    <div class="citation-grid">
+      <div class="citation-card">
+        <h3>Citation Audit (Onboarding)</h3>
+        <ul>
+          <li>Run a full citation audit via BrightLocal for every new client</li>
+          <li>Identify existing citations and flag any with incorrect NAP data</li>
+          <li>Identify key directories the client is missing from</li>
+          <li>Prioritize fixes: Google, Yelp, Facebook, Bing Places, Apple Maps first</li>
+          <li>Document all citation sources in a client citation tracker</li>
+          <li>Correct all inaccurate listings within the first 30 days</li>
+        </ul>
+      </div>
+      <div class="citation-card">
+        <h3>Ongoing Citation Building</h3>
+        <ul>
+          <li>Submit client to new high-authority directories monthly (minimum 5 per month)</li>
+          <li>Prioritize industry-specific directories (e.g. Healthgrades, Zocdoc for medical clients)</li>
+          <li>Ensure NAP is 100% consistent across all submissions</li>
+          <li>Track submission status and live citation count in BrightLocal</li>
+          <li>Monitor for duplicate citations and suppress or remove them</li>
+          <li>Report on total citation count growth in monthly report</li>
+        </ul>
+      </div>
+      <div class="citation-card">
+        <h3>NAP Consistency Standards</h3>
+        <ul>
+          <li>Business name must match exactly across all platforms — no abbreviations or variations</li>
+          <li>Phone number format must be consistent (e.g. always (416) 555-0100)</li>
+          <li>Address must match Google Maps exactly, including suite/unit formatting</li>
+          <li>Website URL must be consistent — always use the canonical version with or without www</li>
+          <li>Any business rebrand or address change triggers a full citation update sweep</li>
+        </ul>
+      </div>
+      <div class="citation-card">
+        <h3>Priority Directory Targets</h3>
+        <p style="margin-bottom:12px;">Every client should be listed and verified on the following platforms before building secondary directories:</p>
+        <ul>
+          <li>Google Business Profile</li>
+          <li>Bing Places for Business</li>
+          <li>Apple Maps Connect</li>
+          <li>Yelp, Facebook, Yellow Pages</li>
+          <li>Industry-specific: Healthgrades, RateMDs, Zocdoc (medical/dental)</li>
+          <li>Canadian: 411.ca, Canada411, LocalPages</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. MONTHLY WORKFLOW -->
+  <div class="section" id="workflow">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">Monthly Workflow</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Each specialist follows a standardized monthly workflow for every assigned client to ensure consistency and nothing falls through the cracks.</p>
+    <div class="workflow">
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">GBP Health Check (Week 1)</div>
+            <div class="step-desc">Log into BrightLocal and review each client's GBP for any Google-suggested edits, ownership issues, or profile suspensions. Confirm profile completeness is at 100%. Flag any issues requiring client input to Account Manager immediately.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Review Responses (Week 1)</div>
+            <div class="step-desc">Check for all new reviews since last month. Draft responses for all reviews — escalate any 3-star or below to the Account Manager before posting. Once approved, publish all responses.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">GBP Post + Photo (Week 2)</div>
+            <div class="step-desc">Write the monthly GBP post using AI, focused on a service or seasonal topic relevant to the client. Generate or source a matching image. Upload both to GBP. Upload at least one additional photo to maintain visual freshness.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Q&A & Service Update Check (Week 2)</div>
+            <div class="step-desc">Review the Q&A section for new questions and respond or seed new Q&As. Check if any service updates, hours changes, or special hours need to be applied based on client communications that month.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">5</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Citation Building (Week 3)</div>
+            <div class="step-desc">Submit the client to 5 new high-authority or industry-specific directories via BrightLocal. Check existing citations for any new inaccuracies or duplicates and resolve them. Update the citation tracker.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">6</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Competitor Snapshot (Week 3)</div>
+            <div class="step-desc">Run a quick local pack check for the client's top 2–3 keywords. Note which competitors appear, their review count and rating, and any notable GBP activity. Document changes from last month.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-left">
+            <div class="step-dot">7</div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Monthly Report (Week 4)</div>
+            <div class="step-desc">Pull data from BrightLocal — local rank positions, citation count, review count, GBP insights (views, calls, direction requests). Compile into the standard monthly report template and send to Account Manager for client delivery.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. REPORTING -->
+  <div class="section" id="reporting">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2 class="section-title">Reporting</h2>
+    </div>
+    <div class="report-grid">
+      <div class="report-card">
+        <h3>Monthly Report Contents</h3>
+        <ul>
+          <li>Local pack rankings for top 5 tracked keywords (vs. prior month)</li>
+          <li>GBP insights: profile views, website clicks, calls, direction requests</li>
+          <li>Review summary: new reviews, average rating, total review count</li>
+          <li>Citation count: total live citations vs. prior month</li>
+          <li>GBP post performance: views and engagement on the month's post</li>
+          <li>Competitor snapshot: top 3 local competitors and their review trends</li>
+          <li>Completed deliverables this month</li>
+          <li>Recommendations and priorities for next month</li>
+        </ul>
+      </div>
+      <div class="report-card">
+        <h3>Key Performance Indicators</h3>
+        <p style="margin-bottom:14px;">These are the metrics the Local SEO team is accountable for moving month over month:</p>
+        <ul>
+          <li>Local pack ranking positions for tracked keywords</li>
+          <li>GBP profile views (impressions)</li>
+          <li>Calls and direction requests generated from GBP</li>
+          <li>Review count growth (new reviews per month)</li>
+          <li>Average star rating (target: maintain or improve)</li>
+          <li>Citation count growth (target: +5 minimum per month)</li>
+          <li>GBP profile completeness score (target: 100%)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. TOOLS -->
+  <div class="section" id="tools">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2 class="section-title">Tools & Tech Stack</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-emoji">📍</div>
+        <div class="tool-name">BrightLocal</div>
+        <div class="tool-purpose">Citations, rank tracking, audits & client reporting</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🗺️</div>
+        <div class="tool-name">Google Business Profile</div>
+        <div class="tool-purpose">Profile management, posts, Q&A, photos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🤖</div>
+        <div class="tool-name">ChatGPT / AI</div>
+        <div class="tool-purpose">GBP post copy and image generation</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔍</div>
+        <div class="tool-name">Google Search Console</div>
+        <div class="tool-purpose">Local organic visibility and indexation</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">BrightLocal Rank Tracker</div>
+        <div class="tool-purpose">Local pack position tracking per keyword</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📋</div>
+        <div class="tool-name">ClickUp / Asana</div>
+        <div class="tool-purpose">Monthly task management per client</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🖼️</div>
+        <div class="tool-name">Stock Photo Library</div>
+        <div class="tool-purpose">Licensed images for GBP posts and uploads</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🎬</div>
+        <div class="tool-name">Loom</div>
+        <div class="tool-purpose">Report walkthroughs for Account Managers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. ESCALATION -->
+  <div class="section" id="escalation">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2 class="section-title">Escalation Protocol</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">The Local SEO team handles everything within GBP and citations. Issues outside that scope are escalated immediately — never left sitting.</p>
+    <div class="escalation-grid">
+      <div class="esc-row">
+        <div class="esc-issue">GBP profile suspended or flagged by Google</div>
+        <span class="esc-badge badge-am">Account Manager</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Negative review requires client input before response</div>
+        <span class="esc-badge badge-am">Account Manager</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client requests address or business name change</div>
+        <span class="esc-badge badge-am">Account Manager + Full Citation Sweep</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Location page or website NAP inconsistency</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">New location pages needed for service area expansion</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client wants blog content about local topics</div>
+        <span class="esc-badge badge-content">Content Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client complaints about rankings or service quality</div>
+        <span class="esc-badge badge-am">Account Manager</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <strong>Wisevu</strong> &nbsp;·&nbsp; Local SEO & GBP Department — Internal Reference Document
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0s';
+        entry.target.style.opacity = '1';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => { s.style.opacity = '0'; observer.observe(s); });
+</script>
+</body>
+</html>

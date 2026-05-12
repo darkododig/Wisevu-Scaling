@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Management Department — Wisevu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #487ab9;
+    --blue-dark: #2d5a96;
+    --blue-deep: #1a3a6b;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c5d8f5;
+    --white: #ffffff;
+    --off-white: #f7f9fc;
+    --gray-light: #eef2f8;
+    --gray: #8899b4;
+    --text: #1a2540;
+    --text-muted: #5a6a84;
+    --accent: #f0a500;
+    --accent-light: #fff8e6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.65; font-size: 16px; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-deep); padding: 18px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.4);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 4px; transition: all 0.2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.12); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 60%, #6fa0d8 100%);
+    padding: 90px 48px 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -60px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(240,165,0,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; position: relative; z-index: 1; }
+  .hero-label {
+    display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+  .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 620px; font-weight: 300; margin-bottom: 40px; }
+  .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .stat { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 18px 28px; backdrop-filter: blur(8px); }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-top: 72px; animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-num {
+    width: 44px; height: 44px; background: var(--blue); color: white; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 1.2rem; flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(72,122,185,0.4);
+  }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 1.85rem; color: var(--blue-deep); line-height: 1.2; }
+
+  /* ── DATA TABLE ── */
+  .data-table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 20px rgba(72,122,185,0.1); }
+  .data-table thead tr { background: var(--blue-deep); color: white; }
+  .data-table thead th { padding: 14px 24px; text-align: left; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .data-table tbody tr { background: white; transition: background 0.15s; }
+  .data-table tbody tr:nth-child(even) { background: var(--gray-light); }
+  .data-table tbody tr:hover { background: var(--blue-light); }
+  .data-table tbody td { padding: 14px 24px; font-size: 0.92rem; border-bottom: 1px solid #e8edf5; color: var(--text); }
+  .data-table tbody td:first-child { font-weight: 600; color: var(--blue-dark); }
+  .data-table tfoot td { background: var(--accent-light); border-top: 2px solid var(--accent); padding: 14px 24px; font-size: 0.88rem; color: var(--text); font-style: italic; }
+
+  /* ── RESPONSIBILITY CARDS ── */
+  .resp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .resp-card { background: white; border-radius: 16px; border: 1px solid var(--blue-mid); overflow: hidden; box-shadow: 0 2px 16px rgba(72,122,185,0.07); transition: transform 0.2s, box-shadow 0.2s; }
+  .resp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(72,122,185,0.15); }
+  .resp-header { background: var(--blue); padding: 22px 26px; display: flex; align-items: center; gap: 14px; }
+  .resp-header.deep { background: var(--blue-deep); }
+  .resp-header.mid  { background: var(--blue-dark); }
+  .resp-header.teal { background: #0e7490; }
+  .resp-header.green { background: #2a7a5a; }
+  .resp-header.purple { background: #6d28d9; }
+  .resp-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .resp-header h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: white; line-height: 1.2; }
+  .resp-header p { font-size: 0.76rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+  .resp-body { padding: 22px 26px; }
+  .resp-body ul { list-style: none; }
+  .resp-body ul li { font-size: 0.88rem; color: var(--text-muted); padding: 7px 0 7px 20px; border-bottom: 1px solid var(--gray-light); position: relative; line-height: 1.5; }
+  .resp-body ul li:last-child { border-bottom: none; }
+  .resp-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 0.78rem; font-weight: 700; }
+
+  /* ── ONBOARDING TIMELINE ── */
+  .onboarding-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: white; border-radius: 16px; border: 1px solid var(--blue-mid); overflow: hidden; box-shadow: 0 2px 16px rgba(72,122,185,0.07); }
+  .ob-step { padding: 28px 24px; border-right: 1px solid var(--blue-mid); position: relative; }
+  .ob-step:last-child { border-right: none; }
+  .ob-week { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+  .ob-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--blue-deep); margin-bottom: 12px; line-height: 1.25; }
+  .ob-step ul { list-style: none; }
+  .ob-step ul li { font-size: 0.82rem; color: var(--text-muted); padding: 5px 0 5px 16px; border-bottom: 1px solid var(--gray-light); position: relative; line-height: 1.4; }
+  .ob-step ul li:last-child { border-bottom: none; }
+  .ob-step ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+  .ob-step-num { position: absolute; top: 20px; right: 20px; font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--blue-light); line-height: 1; }
+
+  /* ── REPORTING STRUCTURE ── */
+  .report-flow { background: white; border-radius: 16px; border: 1px solid var(--blue-mid); padding: 32px; box-shadow: 0 2px 16px rgba(72,122,185,0.06); }
+  .flow-row { display: flex; align-items: stretch; gap: 0; margin-bottom: 16px; }
+  .flow-row:last-child { margin-bottom: 0; }
+  .flow-dept {
+    background: var(--blue-deep); color: white; border-radius: 10px 0 0 10px;
+    padding: 14px 20px; min-width: 180px; display: flex; align-items: center;
+    font-weight: 700; font-size: 0.88rem; gap: 10px;
+  }
+  .flow-arrow { background: var(--blue-light); display: flex; align-items: center; justify-content: center; padding: 0 14px; color: var(--blue-dark); font-size: 1.1rem; font-weight: 700; }
+  .flow-items { background: var(--gray-light); border-radius: 0 10px 10px 0; padding: 14px 20px; flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .flow-tag { background: white; color: var(--text-muted); font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--blue-mid); }
+  .flow-result { display: flex; align-items: center; justify-content: center; margin: 8px 0; gap: 12px; }
+  .flow-result-box { background: var(--blue); color: white; border-radius: 10px; padding: 16px 32px; font-weight: 700; font-size: 0.95rem; text-align: center; }
+  .flow-result-arrow { font-size: 1.5rem; color: var(--blue); }
+
+  /* ── REPORTING CALL STRUCTURE ── */
+  .call-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .call-card { background: white; border-radius: 14px; padding: 28px; border: 1px solid var(--blue-mid); box-shadow: 0 2px 16px rgba(72,122,185,0.06); }
+  .call-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--blue-deep); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--blue-light); }
+  .call-card ul { list-style: none; }
+  .call-card ul li { font-size: 0.88rem; color: var(--text-muted); padding: 8px 0 8px 22px; border-bottom: 1px solid var(--gray-light); position: relative; line-height: 1.5; }
+  .call-card ul li:last-child { border-bottom: none; }
+  .call-card ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: var(--blue); border-radius: 50%; }
+  .call-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── WORKFLOW ── */
+  .workflow { background: white; border-radius: 16px; border: 1px solid var(--blue-mid); padding: 32px; box-shadow: 0 2px 16px rgba(72,122,185,0.06); }
+  .workflow-step { display: flex; gap: 20px; align-items: flex-start; padding-bottom: 28px; }
+  .workflow-step:last-child { padding-bottom: 0; }
+  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-dot { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; box-shadow: 0 3px 10px rgba(72,122,185,0.35); }
+  .step-line { width: 2px; flex: 1; background: var(--blue-mid); margin-top: 6px; min-height: 24px; }
+  .workflow-step:last-child .step-line { display: none; }
+  .step-content { padding-top: 8px; }
+  .step-title { font-weight: 700; font-size: 0.95rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .step-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── RETENTION BANNER ── */
+  .retention-banner {
+    background: linear-gradient(135deg, var(--blue-deep), #2d5a96);
+    border-radius: 16px; padding: 32px 36px; color: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    box-shadow: 0 4px 24px rgba(26,58,107,0.25);
+  }
+  .retention-banner h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 14px; color: white; }
+  .retention-banner ul { list-style: none; }
+  .retention-banner ul li { font-size: 0.87rem; color: rgba(255,255,255,0.8); padding: 7px 0 7px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; line-height: 1.5; }
+  .retention-banner ul li:last-child { border-bottom: none; }
+  .retention-banner ul li::before { content: '✦'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 10px; }
+  .r-label { display: inline-block; background: rgba(240,165,0,0.2); color: var(--accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; border: 1px solid rgba(240,165,0,0.3); }
+
+  /* ── TOOLS ── */
+  .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tool-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--blue-mid); box-shadow: 0 2px 12px rgba(72,122,185,0.06); transition: all 0.2s; text-align: center; }
+  .tool-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(72,122,185,0.15); }
+  .tool-emoji { font-size: 1.8rem; margin-bottom: 10px; }
+  .tool-name { font-weight: 700; font-size: 0.88rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .tool-purpose { font-size: 0.78rem; color: var(--gray); line-height: 1.4; }
+
+  /* ── ESCALATION ── */
+  .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .esc-row { background: white; border-radius: 12px; padding: 18px 22px; border-left: 4px solid var(--blue); display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 2px 10px rgba(72,122,185,0.06); transition: all 0.2s; }
+  .esc-row:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(72,122,185,0.12); }
+  .esc-issue { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .esc-badge { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+  .badge-dev    { background: var(--blue-light); color: var(--blue-dark); }
+  .badge-lead   { background: #fef3e2; color: #a06000; }
+  .badge-onpage { background: #f3e8ff; color: #6b21a8; }
+  .badge-local  { background: #e8f5e9; color: #2e7d32; }
+  .badge-content { background: #fce7f3; color: #9d174d; }
+  .badge-links  { background: #fff7ed; color: #c2410c; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--blue-deep); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 32px; font-size: 0.82rem; margin-top: 80px; }
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 60px 20px 50px; }
+    .page { padding: 0 20px 60px; }
+    .resp-grid, .call-grid, .retention-banner, .escalation-grid { grid-template-columns: 1fr; }
+    .onboarding-grid { grid-template-columns: 1fr 1fr; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+    .flow-dept { min-width: 120px; font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">wise<span>vu</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#responsibilities">Responsibilities</a></li>
+    <li><a href="#onboarding">Onboarding</a></li>
+    <li><a href="#reporting">Reporting</a></li>
+    <li><a href="#retention">Retention</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#escalation">Escalation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Internal Department Reference</div>
+    <h1>Account<br><em>Management</em></h1>
+    <p>Structure, responsibilities, and monthly workflow for managing client relationships, consolidating reporting, coordinating departments, and driving retention and growth.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">20<span>–30</span></div>
+        <div class="stat-label">Clients per AM</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1<span>×mo</span></div>
+        <div class="stat-label">Reporting call per client</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Core responsibilities</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">Department Overview</h2>
+    </div>
+    <div style="background:white;border-radius:14px;padding:28px;border:1px solid var(--blue-mid);box-shadow:0 2px 16px rgba(72,122,185,0.06);margin-bottom:20px;">
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.75;">The Account Management Department is the bridge between Wisevu's internal teams and its clients. Account Managers do not produce SEO deliverables — they own the client relationship, ensure every department delivers on time, consolidate reporting into a single client-facing summary, and are responsible for client satisfaction, retention, and growth. Each AM handles 20–30 clients and communicates with each one through a monthly reporting call.</p>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Metric</th><th>Target / Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Clients per Account Manager</td><td>20–30</td></tr>
+        <tr><td>Primary client touchpoint</td><td>Monthly reporting call</td></tr>
+        <tr><td>Report consolidation</td><td>AM collects reports from all 4 departments and presents a single summary to the client</td></tr>
+        <tr><td>Deliverable review</td><td>AM reviews and approves all client-facing work before delivery</td></tr>
+        <tr><td>Escalation ownership</td><td>All client complaints and sensitive issues route through the AM first</td></tr>
+        <tr><td>Upsell target</td><td>Identify upgrade opportunities at the 3-month and 6-month mark for each client</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. CORE RESPONSIBILITIES -->
+  <div class="section" id="responsibilities">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Core Responsibilities</h2>
+    </div>
+    <div class="resp-grid">
+
+      <div class="resp-card">
+        <div class="resp-header">
+          <div class="resp-icon">🚀</div>
+          <div><h3>Client Onboarding</h3><p>Setting every new client up for success</p></div>
+        </div>
+        <div class="resp-body"><ul>
+          <li>Own the full onboarding process from contract signed to campaign live</li>
+          <li>Conduct kickoff call with the client — confirm goals, target keywords, service areas, and brand voice</li>
+          <li>Complete and distribute the internal onboarding brief to all four departments</li>
+          <li>Set up client in ClickUp / Asana with correct plan, deliverables, and deadlines</li>
+          <li>Confirm GBP access, website access, and any third-party tool logins are received and shared with the right teams</li>
+          <li>Set expectations: explain what will be delivered each month, how reporting works, and how to reach the AM</li>
+          <li>Target: client fully onboarded and first deliverables in progress within 5 business days of contract signing</li>
+        </ul></div>
+      </div>
+
+      <div class="resp-card">
+        <div class="resp-header deep">
+          <div class="resp-icon">📊</div>
+          <div><h3>Monthly Consolidated Reporting</h3><p>One clear summary across all departments</p></div>
+        </div>
+        <div class="resp-body"><ul>
+          <li>Collect reports from On-Page SEO, Local SEO / GBP, Content, and Link Building teams by the 25th of each month</li>
+          <li>Review each department's report for accuracy and completeness before consolidating</li>
+          <li>Compile a single client-facing monthly summary — results achieved, work completed, priorities for next month</li>
+          <li>Prepare talking points and key highlights for the monthly reporting call</li>
+          <li>Deliver the report to the client at least 24 hours before the call so they can review it</li>
+          <li>Present the report on the monthly call — lead with wins, address any underperformance transparently</li>
+          <li>Document client feedback and action items from the call and distribute to relevant departments</li>
+        </ul></div>
+      </div>
+
+      <div class="resp-card">
+        <div class="resp-header mid">
+          <div class="resp-icon">🔗</div>
+          <div><h3>Cross-Department Coordination</h3><p>Keeping all teams aligned on every client</p></div>
+        </div>
+        <div class="resp-body"><ul>
+          <li>Act as the single point of contact between the client and all internal teams</li>
+          <li>Distribute client requests, feedback, and new information to the relevant department immediately</li>
+          <li>Chase departments when deliverables are delayed — never let a missed deadline reach the client without a heads-up</li>
+          <li>Flag priority changes (e.g. client launching a new service, changing location) to all departments at once</li>
+          <li>Run a weekly internal check-in with assigned teams to confirm deliverable status for all clients</li>
+          <li>Ensure no department is working with outdated client information</li>
+        </ul></div>
+      </div>
+
+      <div class="resp-card">
+        <div class="resp-header teal">
+          <div class="resp-icon">✅</div>
+          <div><h3>Deliverable Review & Approval</h3><p>Quality gate before anything reaches the client</p></div>
+        </div>
+        <div class="resp-body"><ul>
+          <li>Review all client-facing deliverables before they are published or sent — blog posts, service pages, GBP posts, link reports</li>
+          <li>Check for: accuracy, tone consistency with the client's brand, factual correctness, and completeness</li>
+          <li>Return any deliverable that does not meet the standard with specific feedback — not a blanket rejection</li>
+          <li>Approve and log all deliverables in the client's ClickUp / Asana task board</li>
+          <li>Never approve content with medical claims that cannot be verified</li>
+          <li>Target review turnaround: 24 hours for standard deliverables, same day for urgent items</li>
+        </ul></div>
+      </div>
+
+      <div class="resp-card">
+        <div class="resp-header green">
+          <div class="resp-icon">📈</div>
+          <div><h3>Upselling & Retention</h3><p>Growing accounts and reducing churn</p></div>
+        </div>
+        <div class="resp-body"><ul>
+          <li>Review every client's plan and results at the 3-month mark — identify gaps in service coverage</li>
+          <li>At 6 months, proactively recommend a plan upgrade if results justify it and the client has room to grow</li>
+          <li>Frame upsells around results and opportunity — never push for revenue's sake</li>
+          <li>Monitor engagement signals: clients who stop responding to calls or emails are churn risks — escalate to team lead</li>
+          <li>Send a proactive check-in email if a client hasn't been contacted in more than 3 weeks outside the reporting cycle</li>
+          <li>Document all upsell conversations and outcomes in the CRM</li>
+          <li>Target: 0 surprise cancellations — every churn risk should be identified and addressed at least 30 days in advance</li>
+        </ul></div>
+      </div>
+
+      <div class="resp-card">
+        <div class="resp-header purple">
+          <div class="resp-icon">🚨</div>
+          <div><h3>Escalation Management</h3><p>Owning problems before they become crises</p></div>
+        </div>
+        <div class="resp-body"><ul>
+          <li>All client complaints route through the AM first — never let a department respond to a client complaint directly</li>
+          <li>Acknowledge every complaint within 2 hours during business hours</li>
+          <li>Investigate internally before responding — get the facts from the relevant department first</li>
+          <li>Respond to the client with a clear explanation and a concrete resolution plan</li>
+          <li>For serious issues (significant ranking drops, GBP suspension, negative press), escalate to team lead and loop in the relevant department head immediately</li>
+          <li>Document every escalation: what happened, how it was resolved, and what process change prevents recurrence</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. ONBOARDING PROCESS -->
+  <div class="section" id="onboarding">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">Client Onboarding Process</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Every new client follows a standardized 4-week onboarding sequence. The AM owns this process end-to-end.</p>
+    <div class="onboarding-grid">
+      <div class="ob-step">
+        <div class="ob-step-num">1</div>
+        <div class="ob-week">Day 1–2</div>
+        <div class="ob-title">Contract & Access</div>
+        <ul>
+          <li>Confirm contract signed and payment processed</li>
+          <li>Request GBP access, website admin, and Google Analytics / GSC access</li>
+          <li>Set up client in project management tool</li>
+          <li>Assign client to all four department specialists</li>
+        </ul>
+      </div>
+      <div class="ob-step">
+        <div class="ob-step-num">2</div>
+        <div class="ob-week">Day 3–5</div>
+        <div class="ob-title">Kickoff Call</div>
+        <ul>
+          <li>Conduct kickoff call with the client</li>
+          <li>Confirm goals, target keywords, and service areas</li>
+          <li>Explain monthly workflow and reporting cadence</li>
+          <li>Complete and distribute internal onboarding brief to all departments</li>
+        </ul>
+      </div>
+      <div class="ob-step">
+        <div class="ob-step-num">3</div>
+        <div class="ob-week">Week 2</div>
+        <div class="ob-title">Audit & Setup</div>
+        <ul>
+          <li>On-Page team runs technical audit</li>
+          <li>Local SEO team runs citation and GBP audit</li>
+          <li>Link builder reviews backlink profile</li>
+          <li>Content team receives first brief</li>
+        </ul>
+      </div>
+      <div class="ob-step">
+        <div class="ob-step-num">4</div>
+        <div class="ob-week">Week 3–4</div>
+        <div class="ob-title">First Deliverables</div>
+        <ul>
+          <li>First content piece drafted and reviewed</li>
+          <li>GBP optimized to 100% completion</li>
+          <li>On-page fixes prioritized and assigned</li>
+          <li>AM confirms client is happy with onboarding experience</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. REPORTING STRUCTURE -->
+  <div class="section" id="reporting">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">Reporting Structure</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">The AM consolidates inputs from all four departments into a single client-facing monthly report, then presents it on the monthly call.</p>
+
+    <div class="report-flow" style="margin-bottom:24px;">
+      <div class="flow-row">
+        <div class="flow-dept">🔍 On-Page SEO</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-items">
+          <span class="flow-tag">Rankings report</span>
+          <span class="flow-tag">Technical fixes completed</span>
+          <span class="flow-tag">CWV status</span>
+          <span class="flow-tag">Next month priorities</span>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-dept">📍 Local SEO / GBP</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-items">
+          <span class="flow-tag">Local pack rankings</span>
+          <span class="flow-tag">GBP insights</span>
+          <span class="flow-tag">Review summary</span>
+          <span class="flow-tag">Citation count</span>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-dept">✍️ Content</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-items">
+          <span class="flow-tag">Content published</span>
+          <span class="flow-tag">Pages created</span>
+          <span class="flow-tag">Refreshes completed</span>
+          <span class="flow-tag">Next month topics</span>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-dept">🔗 Link Building</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-items">
+          <span class="flow-tag">Links acquired</span>
+          <span class="flow-tag">DR breakdown</span>
+          <span class="flow-tag">Anchor text log</span>
+          <span class="flow-tag">Pipeline status</span>
+        </div>
+      </div>
+      <div class="flow-result">
+        <div class="flow-result-arrow">↓</div>
+      </div>
+      <div class="flow-result">
+        <div class="flow-result-box">AM Consolidated Monthly Report → Client Reporting Call</div>
+      </div>
+    </div>
+
+    <div class="call-grid">
+      <div class="call-card">
+        <h3>Monthly Reporting Call Agenda</h3>
+        <ul>
+          <li>Open with wins — what improved this month and why</li>
+          <li>Walk through organic traffic and ranking trends</li>
+          <li>Cover GBP performance — calls, views, direction requests</li>
+          <li>Summarize content published and links acquired</li>
+          <li>Address any underperformance transparently with context</li>
+          <li>Present the top 3–5 priorities for next month</li>
+          <li>Open for client questions — document all action items</li>
+          <li>Close with a clear summary of what happens next</li>
+        </ul>
+      </div>
+      <div class="call-card">
+        <h3>Call Best Practices</h3>
+        <ul>
+          <li>Send the report to the client at least 24 hours before the call</li>
+          <li>Keep calls to 30–45 minutes — respect the client's time</li>
+          <li>Never come to a call without knowing the numbers cold</li>
+          <li>If results are down, have a clear explanation and recovery plan ready before the call</li>
+          <li>Record calls with client consent for internal review and training</li>
+          <li>Send a follow-up email within 24 hours summarizing action items</li>
+          <li>Log call notes and outcomes in the CRM immediately after</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. UPSELL & RETENTION -->
+  <div class="section" id="retention">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2 class="section-title">Upselling & Retention</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">Retention is the AM's most important metric. A client who stays and grows is worth far more than a new client acquired.</p>
+    <div class="retention-banner">
+      <div>
+        <div class="r-label">📈 Upsell signals</div>
+        <h3>When to recommend an upgrade</h3>
+        <ul>
+          <li>Client is ranking on page 2 for high-value keywords — more links or content could push them to page 1</li>
+          <li>Client has service areas not covered by existing location pages</li>
+          <li>Client's GBP competitors have significantly more reviews — review management add-on makes sense</li>
+          <li>Client mentions wanting faster results — discuss what a higher-tier plan delivers</li>
+          <li>Client is launching a new service or location — expansion opportunity</li>
+          <li>3-month results show momentum — right time to invest more while growth is happening</li>
+        </ul>
+      </div>
+      <div>
+        <div class="r-label" style="background:rgba(239,68,68,0.2);color:#fca5a5;border-color:rgba(239,68,68,0.3);">⚠️ Churn warning signs</div>
+        <h3>When retention is at risk</h3>
+        <ul>
+          <li>Client stops responding to emails or misses reporting calls</li>
+          <li>Client questions the value of SEO or asks "what am I paying for"</li>
+          <li>Rankings have dropped for 2+ consecutive months without explanation</li>
+          <li>Client mentions a competitor agency reaching out to them</li>
+          <li>Client has had an unresolved complaint for more than 5 business days</li>
+          <li>Client's business is going through financial difficulty or a rebrand</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. MONTHLY WORKFLOW -->
+  <div class="section" id="workflow">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2 class="section-title">Monthly Workflow</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">The AM's month runs on a consistent cycle across all 20–30 clients. Standardization is what makes this volume manageable.</p>
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Deliverable Check-In (Week 1)</div>
+          <div class="step-desc">Confirm all departments have their briefs and are on track for the month. Flag any clients with upcoming changes (new service, address update, seasonal campaign) and distribute to relevant teams. Review any outstanding action items from last month's client calls.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Deliverable Review (Week 2–3)</div>
+          <div class="step-desc">Review and approve all client-facing content as it comes in from departments — blog posts, service pages, GBP posts. Return anything that doesn't meet standard with specific feedback. Approve and log all completed deliverables in ClickUp / Asana.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Collect Department Reports (By 25th)</div>
+          <div class="step-desc">Chase all four departments for their monthly reports by the 25th. Review each report for accuracy, completeness, and anything that needs to be flagged or explained before it reaches the client. Do not consolidate until all four reports are in and reviewed.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Compile & Send Consolidated Report (By 27th)</div>
+          <div class="step-desc">Build the client-facing monthly summary from all four department reports. Lead with wins, include key metrics, summarize work completed, and outline next month's priorities. Send to the client at least 24 hours before their scheduled reporting call.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">5</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Monthly Reporting Calls (Week 4)</div>
+          <div class="step-desc">Conduct monthly reporting calls with all assigned clients. Present results, address questions, and document action items. For any client showing churn signals, schedule a follow-up within the week. Log all call notes in the CRM same day.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">6</div></div>
+        <div class="step-content">
+          <div class="step-title">Follow-Ups & Next Month Setup (End of Month)</div>
+          <div class="step-desc">Send post-call follow-up emails within 24 hours summarizing action items. Distribute any new client instructions or changes to departments for the coming month. Review client health across all accounts — flag any retention risks to the team lead before the new month begins.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. TOOLS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2 class="section-title">Tools & Tech Stack</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-emoji">📋</div>
+        <div class="tool-name">ClickUp / Asana</div>
+        <div class="tool-purpose">Client task management, deliverable tracking, onboarding checklists</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🎬</div>
+        <div class="tool-name">Loom</div>
+        <div class="tool-purpose">Report walkthroughs and async client communication</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📞</div>
+        <div class="tool-name">Zoom / Google Meet</div>
+        <div class="tool-purpose">Monthly reporting calls with clients</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">Google Looker Studio</div>
+        <div class="tool-purpose">Consolidated client dashboards and reporting</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📍</div>
+        <div class="tool-name">BrightLocal</div>
+        <div class="tool-purpose">White-label local SEO reports for clients</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔎</div>
+        <div class="tool-name">Google Search Console</div>
+        <div class="tool-purpose">Traffic and ranking data for client reporting</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">💼</div>
+        <div class="tool-name">CRM (HubSpot / GoHighLevel)</div>
+        <div class="tool-purpose">Client records, call logs, upsell tracking</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📧</div>
+        <div class="tool-name">Gmail / Outlook</div>
+        <div class="tool-purpose">Client communication and follow-up emails</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ESCALATION -->
+  <div class="section" id="escalation">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2 class="section-title">Escalation Protocol</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">The AM is the first line of escalation for all client issues. Internal issues that require specialist input are escalated to the relevant department — never bypassed.</p>
+    <div class="escalation-grid">
+      <div class="esc-row">
+        <div class="esc-issue">Significant ranking drop (3+ positions on key terms)</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">GBP suspended or profile removed</div>
+        <span class="esc-badge badge-local">Local SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client unhappy with content quality</div>
+        <span class="esc-badge badge-content">Content Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Link acquired and later removed</div>
+        <span class="esc-badge badge-links">Link Building Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client requests a service not in current plan</div>
+        <span class="esc-badge badge-lead">Team Lead — upsell discussion</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client signals intent to cancel</div>
+        <span class="esc-badge badge-lead">Team Lead — retention escalation</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Website technical issue affecting SEO</div>
+        <span class="esc-badge badge-onpage">On-Page SEO → Developer</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Billing dispute or contract question</div>
+        <span class="esc-badge badge-lead">Team Lead / Operations</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Wisevu</strong> &nbsp;·&nbsp; Account Management Department — Internal Reference Document
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0s';
+        entry.target.style.opacity = '1';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => { s.style.opacity = '0'; observer.observe(s); });
+</script>
+</body>
+</html>

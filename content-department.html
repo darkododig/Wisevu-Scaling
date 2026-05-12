@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Department — Wisevu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #487ab9;
+    --blue-dark: #2d5a96;
+    --blue-deep: #1a3a6b;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c5d8f5;
+    --white: #ffffff;
+    --off-white: #f7f9fc;
+    --gray-light: #eef2f8;
+    --gray: #8899b4;
+    --text: #1a2540;
+    --text-muted: #5a6a84;
+    --accent: #f0a500;
+    --accent-light: #fff8e6;
+    --purple: #6b21a8;
+    --purple-light: #f3e8ff;
+    --teal: #0e7490;
+    --teal-light: #e0f2fe;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-deep);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.4);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); letter-spacing: 0.01em; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.12); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, #3a4f8f 45%, #7c3aad 100%);
+    padding: 90px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(124,58,173,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 900px; position: relative; z-index: 1; }
+  .hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+  .hero p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.8);
+    max-width: 620px;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .stat {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 18px 28px;
+    backdrop-filter: blur(8px);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-top: 72px; animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-num {
+    width: 44px; height: 44px;
+    background: var(--blue);
+    color: white;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(72,122,185,0.4);
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.85rem;
+    color: var(--blue-deep);
+    line-height: 1.2;
+  }
+
+  /* ── DATA TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(72,122,185,0.1);
+  }
+  .data-table thead tr { background: var(--blue-deep); color: white; }
+  .data-table thead th {
+    padding: 14px 24px;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .data-table tbody tr { background: white; transition: background 0.15s; }
+  .data-table tbody tr:nth-child(even) { background: var(--gray-light); }
+  .data-table tbody tr:hover { background: var(--blue-light); }
+  .data-table tbody td {
+    padding: 14px 24px;
+    font-size: 0.92rem;
+    border-bottom: 1px solid #e8edf5;
+    color: var(--text);
+  }
+  .data-table tbody td:first-child { font-weight: 600; color: var(--blue-dark); }
+  .data-table tfoot td {
+    background: var(--accent-light);
+    border-top: 2px solid var(--accent);
+    padding: 14px 24px;
+    font-size: 0.88rem;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* ── CONTENT TYPE CARDS ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .content-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--blue-mid);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(72,122,185,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .content-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(72,122,185,0.15);
+  }
+  .content-card-header {
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hdr-blue   { background: var(--blue); }
+  .hdr-deep   { background: var(--blue-deep); }
+  .hdr-purple { background: #6d28d9; }
+  .hdr-teal   { background: #0e7490; }
+  .hdr-green  { background: #2a7a5a; }
+  .content-icon {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .content-card-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: white;
+    line-height: 1.2;
+  }
+  .content-card-header p { font-size: 0.76rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+  .content-body { padding: 22px 26px; }
+  .content-body ul { list-style: none; }
+  .content-body ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 7px 0 7px 20px;
+    border-bottom: 1px solid var(--gray-light);
+    position: relative;
+    line-height: 1.5;
+  }
+  .content-body ul li:last-child { border-bottom: none; }
+  .content-body ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  /* ── STANDARDS GRID ── */
+  .standards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .standard-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid var(--blue-mid);
+    box-shadow: 0 2px 16px rgba(72,122,185,0.06);
+  }
+  .standard-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--blue-deep);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-light);
+  }
+  .standard-card ul { list-style: none; }
+  .standard-card ul li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 8px 0 8px 22px;
+    border-bottom: 1px solid var(--gray-light);
+    position: relative;
+    line-height: 1.5;
+  }
+  .standard-card ul li:last-child { border-bottom: none; }
+  .standard-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+
+  /* ── AI USAGE BANNER ── */
+  .ai-banner {
+    background: linear-gradient(135deg, #1e1b4b, #3730a3);
+    border-radius: 16px;
+    padding: 32px 36px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    box-shadow: 0 4px 24px rgba(55,48,163,0.25);
+  }
+  .ai-banner h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+    color: white;
+  }
+  .ai-banner ul { list-style: none; }
+  .ai-banner ul li {
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.8);
+    padding: 7px 0 7px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    line-height: 1.5;
+  }
+  .ai-banner ul li:last-child { border-bottom: none; }
+  .ai-banner ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 10px;
+  }
+  .ai-label {
+    display: inline-block;
+    background: rgba(240,165,0,0.25);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(240,165,0,0.35);
+  }
+
+  /* ── WORKFLOW ── */
+  .workflow {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--blue-mid);
+    padding: 32px;
+    box-shadow: 0 2px 16px rgba(72,122,185,0.06);
+  }
+  .workflow-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 28px;
+  }
+  .workflow-step:last-child { padding-bottom: 0; }
+  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-dot {
+    width: 40px; height: 40px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(72,122,185,0.35);
+  }
+  .step-line { width: 2px; flex: 1; background: var(--blue-mid); margin-top: 6px; min-height: 24px; }
+  .workflow-step:last-child .step-line { display: none; }
+  .step-content { padding-top: 8px; }
+  .step-title { font-weight: 700; font-size: 0.95rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .step-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── WORD COUNT TABLE ── */
+  .wc-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .wc-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 16px;
+    border: 1px solid var(--blue-mid);
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(72,122,185,0.06);
+  }
+  .wc-type { font-size: 0.78rem; font-weight: 600; color: var(--blue-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .wc-range { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--blue-deep); line-height: 1; margin-bottom: 6px; }
+  .wc-unit { font-size: 0.72rem; color: var(--gray); }
+
+  /* ── TOOLS ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .tool-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--blue-mid);
+    box-shadow: 0 2px 12px rgba(72,122,185,0.06);
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .tool-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(72,122,185,0.15); }
+  .tool-emoji { font-size: 1.8rem; margin-bottom: 10px; }
+  .tool-name { font-weight: 700; font-size: 0.88rem; color: var(--blue-dark); margin-bottom: 4px; }
+  .tool-purpose { font-size: 0.78rem; color: var(--gray); line-height: 1.4; }
+
+  /* ── ESCALATION ── */
+  .escalation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .esc-row {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    border-left: 4px solid var(--blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 10px rgba(72,122,185,0.06);
+    transition: all 0.2s;
+  }
+  .esc-row:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(72,122,185,0.12); }
+  .esc-issue { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .esc-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .badge-dev    { background: var(--blue-light); color: var(--blue-dark); }
+  .badge-am     { background: #fef3e2; color: #a06000; }
+  .badge-onpage { background: var(--purple-light); color: var(--purple); }
+  .badge-local  { background: #e8f5e9; color: #2e7d32; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 0.82rem;
+    margin-top: 80px;
+  }
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 60px 20px 50px; }
+    .page { padding: 0 20px 60px; }
+    .content-grid, .standards-grid, .escalation-grid, .ai-banner { grid-template-columns: 1fr; }
+    .wc-grid { grid-template-columns: 1fr 1fr; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">wise<span>vu</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#deliverables">Deliverables</a></li>
+    <li><a href="#standards">Standards</a></li>
+    <li><a href="#ai">AI Usage</a></li>
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#escalation">Escalation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Internal Department Reference</div>
+    <h1>Content<br><em>Department</em></h1>
+    <p>Structure, responsibilities, and content standards for producing SEO-optimized blog posts, service pages, location pages, content refreshes, and meta data at scale.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">30</div>
+        <div class="stat-label">Max clients per writer</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Content types produced</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1<span>×mo</span></div>
+        <div class="stat-label">Minimum per client</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">Department Overview</h2>
+    </div>
+    <div style="background:white;border-radius:14px;padding:28px;border:1px solid var(--blue-mid);box-shadow:0 2px 16px rgba(72,122,185,0.06);margin-bottom:20px;">
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.75;">The Content Department produces all written assets that drive organic rankings and convert visitors into patients. Content writers work closely with the On-Page SEO team — who supply keyword research and content briefs — and produce five content types: blog posts, service pages, location pages, content refreshes, and meta titles and descriptions. Each writer handles up to 30 clients, ensuring enough time to produce high-quality, medically accurate, E-E-A-T aligned content.</p>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Metric</th><th>Target / Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Clients per writer</td><td>Up to 30</td></tr>
+        <tr><td>Minimum content per client</td><td>1 blog post + 1 on-page deliverable per month (per starter plan)</td></tr>
+        <tr><td>Brief source</td><td>On-Page SEO team supplies keyword research and content briefs</td></tr>
+        <tr><td>AI usage</td><td>Permitted for drafting; all content must be human-reviewed, edited, and fact-checked</td></tr>
+        <tr><td>Primary tools</td><td>Google Docs, Ahrefs / SEMrush, ChatGPT</td></tr>
+        <tr><td>Quality standard</td><td>E-E-A-T aligned; medically accurate for healthcare clients; no keyword stuffing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. DELIVERABLES -->
+  <div class="section" id="deliverables">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Content Type Deliverables</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Each content type has its own production process, quality standards, and word count targets.</p>
+    <div class="content-grid">
+
+      <div class="content-card">
+        <div class="content-card-header hdr-blue">
+          <div class="content-icon">✍️</div>
+          <div>
+            <h3>Blog Posts</h3>
+            <p>1 per client per month — informational, condition, or service-based</p>
+          </div>
+        </div>
+        <div class="content-body">
+          <ul>
+            <li>Receive content brief from On-Page SEO team: target keyword, intent, outline, internal links</li>
+            <li>Research topic thoroughly — especially for healthcare clients where accuracy is non-negotiable</li>
+            <li>Write to target word count (800–1,500 words depending on topic competitiveness)</li>
+            <li>Use primary keyword in H1, first 100 words, at least one H2, and naturally throughout body</li>
+            <li>Include at least 2 internal links to relevant service or location pages</li>
+            <li>Add a clear CTA at the end (e.g. "Book a consultation today")</li>
+            <li>Format with scannable H2/H3 subheadings, short paragraphs, and bullet points where appropriate</li>
+            <li>Deliver in Google Doc with suggested meta title and meta description</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="content-card-header hdr-deep">
+          <div class="content-icon">🏥</div>
+          <div>
+            <h3>New Service Pages</h3>
+            <p>Targeting high-intent commercial keywords</p>
+          </div>
+        </div>
+        <div class="content-body">
+          <ul>
+            <li>Receive brief from On-Page SEO: primary keyword, competitor pages, word count target</li>
+            <li>Write to 600–1,200 words — longer if competitive analysis shows top-ranking pages are more in-depth</li>
+            <li>Lead with the service name and primary keyword in the H1</li>
+            <li>Include: what the service is, who it's for, what to expect, why choose this practice</li>
+            <li>Weave in secondary keywords (e.g. "dental implants Toronto") naturally</li>
+            <li>Include FAQ section where appropriate, targeting People Also Ask questions</li>
+            <li>Add schema-ready FAQ formatting — clearly marked for the On-Page team to add FAQPage schema</li>
+            <li>End with a strong CTA and booking prompt</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="content-card-header hdr-purple">
+          <div class="content-icon">📍</div>
+          <div>
+            <h3>Location Pages</h3>
+            <p>Geo-targeted pages for local search visibility</p>
+          </div>
+        </div>
+        <div class="content-body">
+          <ul>
+            <li>Receive brief from On-Page SEO: city/neighbourhood target, primary keyword, nearby landmarks or context</li>
+            <li>Write to 400–700 words — enough for substance without thin-content risk</li>
+            <li>H1 must include the service + location (e.g. "Dental Implants in Mississauga")</li>
+            <li>Reference the specific neighbourhood, nearby landmarks, or local context naturally</li>
+            <li>Do not copy-paste from other location pages — each page must be meaningfully unique</li>
+            <li>Include the practice's NAP details within the copy or structured section</li>
+            <li>Add a CTA with a local angle (e.g. "Serving patients in Mississauga and surrounding areas")</li>
+            <li>Flag to On-Page team if LocalBusiness schema and Google Map embed are needed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="content-card-header hdr-teal">
+          <div class="content-icon">🔄</div>
+          <div>
+            <h3>Content Refreshes</h3>
+            <p>Reviving underperforming or outdated pages</p>
+          </div>
+        </div>
+        <div class="content-body">
+          <ul>
+            <li>Receive refresh brief from On-Page SEO: current URL, reason for refresh (outdated, thin, keyword drift), and updated target keyword</li>
+            <li>Review the existing page and GSC data before writing — understand what's already ranking</li>
+            <li>Retain any sections that are performing; rewrite or expand underperforming sections</li>
+            <li>Update any outdated statistics, treatment information, or references</li>
+            <li>Strengthen internal linking based on the current site structure</li>
+            <li>Ensure updated keyword placement matches current On-Page SEO brief</li>
+            <li>Do not change the URL slug — flag any redirect needs to the On-Page team</li>
+            <li>Mark all changes clearly in the Google Doc using tracked changes or comments</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-card" style="grid-column: 1 / -1;">
+        <div class="content-card-header hdr-green">
+          <div class="content-icon">🏷️</div>
+          <div>
+            <h3>Meta Titles & Descriptions</h3>
+            <p>Every new page produced gets optimized meta data — and existing pages are audited on request</p>
+          </div>
+        </div>
+        <div class="content-body">
+          <ul style="display:grid;grid-template-columns:1fr 1fr;gap:0 32px;">
+            <li>Meta title: include primary keyword, keep under 60 characters, make it compelling for CTR</li>
+            <li>Meta description: 140–160 characters, summarize the page value, include a soft CTA</li>
+            <li>Never duplicate meta titles or descriptions across pages — each must be unique</li>
+            <li>For service pages: lead meta title with the keyword (e.g. "Root Canal Toronto | [Practice Name]")</li>
+            <li>For blog posts: balance keyword inclusion with readability — avoid robotic phrasing</li>
+            <li>For location pages: always include city name in both meta title and description</li>
+            <li>Flag any existing pages with missing or duplicate meta data to the On-Page SEO team</li>
+            <li>Deliver meta data in the same Google Doc as the content, clearly labelled at the top</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. WORD COUNT REFERENCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">Word Count Reference</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">These are baseline targets. The On-Page SEO team may adjust word count in the brief based on competitive analysis of top-ranking pages for that keyword.</p>
+    <div class="wc-grid">
+      <div class="wc-card">
+        <div class="wc-type">Blog Post</div>
+        <div class="wc-range">800–1,500</div>
+        <div class="wc-unit">words</div>
+      </div>
+      <div class="wc-card">
+        <div class="wc-type">Service Page</div>
+        <div class="wc-range">600–1,200</div>
+        <div class="wc-unit">words</div>
+      </div>
+      <div class="wc-card">
+        <div class="wc-type">Location Page</div>
+        <div class="wc-range">400–700</div>
+        <div class="wc-unit">words</div>
+      </div>
+      <div class="wc-card">
+        <div class="wc-type">Content Refresh</div>
+        <div class="wc-range">Match or exceed original</div>
+        <div class="wc-unit">per brief</div>
+      </div>
+      <div class="wc-card">
+        <div class="wc-type">Meta Title</div>
+        <div class="wc-range">&lt;60</div>
+        <div class="wc-unit">characters</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. QUALITY STANDARDS -->
+  <div class="section" id="standards">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">Content Quality Standards</h2>
+    </div>
+    <div class="standards-grid">
+      <div class="standard-card">
+        <h3>E-E-A-T Requirements</h3>
+        <ul>
+          <li>All medical or health claims must be factually accurate and citable</li>
+          <li>Reference authoritative sources where relevant (e.g. Canadian Dental Association, Health Canada)</li>
+          <li>Avoid making absolute claims about outcomes (e.g. "guaranteed results")</li>
+          <li>Write from the perspective of a knowledgeable, trustworthy practitioner</li>
+          <li>Do not fabricate patient experiences, statistics, or testimonials</li>
+          <li>For YMYL (Your Money Your Life) content, extra care is required — flag any uncertainty to the team lead</li>
+        </ul>
+      </div>
+      <div class="standard-card">
+        <h3>SEO Writing Rules</h3>
+        <ul>
+          <li>One H1 per page — must include the primary keyword</li>
+          <li>Primary keyword used in first 100 words naturally</li>
+          <li>No keyword stuffing — keyword density should feel natural, not forced</li>
+          <li>Use semantic variations and related terms throughout (LSI keywords)</li>
+          <li>Every page needs at least 2 internal links — use descriptive anchor text</li>
+          <li>Short paragraphs (2–4 sentences max) for readability on mobile</li>
+        </ul>
+      </div>
+      <div class="standard-card">
+        <h3>Formatting Standards</h3>
+        <ul>
+          <li>Deliver all content in Google Docs — shared with the On-Page SEO team</li>
+          <li>Use Heading styles (H1, H2, H3) — never just bold text as fake headings</li>
+          <li>Include meta title and meta description at the top of every Google Doc</li>
+          <li>Use comments in Google Docs to flag any uncertainties or questions for review</li>
+          <li>Do not include images in drafts — the On-Page team handles media</li>
+          <li>Use tracked changes when revising existing content refreshes</li>
+        </ul>
+      </div>
+      <div class="standard-card">
+        <h3>Tone & Voice</h3>
+        <ul>
+          <li>Warm, professional, and reassuring — especially for healthcare content</li>
+          <li>Write for the patient first, search engine second</li>
+          <li>Avoid jargon without explanation — define medical terms when first introduced</li>
+          <li>Use second person ("you" / "your") to speak directly to the reader</li>
+          <li>CTAs should feel natural and helpful, not pushy or salesy</li>
+          <li>Match the tone to the client — a medical spa differs from a dental clinic</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. AI USAGE POLICY -->
+  <div class="section" id="ai">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2 class="section-title">AI Usage Policy</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">AI writing tools (primarily ChatGPT) are permitted and encouraged for efficiency — but with strict guardrails to ensure quality and accuracy.</p>
+    <div class="ai-banner">
+      <div>
+        <div class="ai-label">✅ Permitted uses</div>
+        <h3>Where AI helps</h3>
+        <ul>
+          <li>Generating a first draft from the content brief</li>
+          <li>Suggesting H2/H3 subheading structures</li>
+          <li>Drafting FAQ sections based on common patient questions</li>
+          <li>Rewording sentences for clarity or tone</li>
+          <li>Generating meta title and description options to choose from</li>
+          <li>Summarizing competitor content for research purposes</li>
+        </ul>
+      </div>
+      <div>
+        <div class="ai-label" style="background:rgba(239,68,68,0.2);color:#fca5a5;border-color:rgba(239,68,68,0.3);">⚠️ Not permitted</div>
+        <h3>Where human judgment is required</h3>
+        <ul>
+          <li>Publishing AI output without human review and editing</li>
+          <li>Accepting AI-generated medical claims without fact-checking</li>
+          <li>Using AI to fabricate reviews, testimonials, or case studies</li>
+          <li>Submitting content that reads as generic or template-like</li>
+          <li>Ignoring the content brief in favour of AI's own keyword choices</li>
+          <li>Using AI to write content that could mislead patients about outcomes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. MONTHLY WORKFLOW -->
+  <div class="section" id="workflow">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2 class="section-title">Monthly Workflow</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.95rem;">Writers follow a consistent monthly cycle for each assigned client, coordinating closely with the On-Page SEO team.</p>
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Receive Content Briefs (Week 1)</div>
+          <div class="step-desc">Collect all content briefs from the On-Page SEO team for the month. Each brief includes the content type, target keyword, intent, suggested outline, word count target, and required internal links. Clarify any unclear briefs before starting.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Research & Outline (Week 1)</div>
+          <div class="step-desc">For each piece, review top-ranking competitor pages using Ahrefs or Google search. Note the structure, depth, and angle they use. Use ChatGPT to help brainstorm the outline if needed, then validate it against the brief before writing.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Draft Content (Week 2)</div>
+          <div class="step-desc">Write first drafts for all assigned content pieces. Use ChatGPT to accelerate drafting but ensure every draft is reviewed, edited for accuracy, and genuinely useful to the reader. Healthcare content must be fact-checked against authoritative sources.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Self-Review & SEO Check (Week 2–3)</div>
+          <div class="step-desc">Before submitting, check every piece against the brief: correct keyword placement, word count, H1/H2 structure, internal links, CTA, and meta data included at the top of the Doc. Read aloud to catch awkward phrasing or overly robotic AI tone.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">5</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Submit to On-Page SEO for Review (Week 3)</div>
+          <div class="step-desc">Share completed Google Docs with the On-Page SEO team. They review for SEO accuracy, keyword placement, and internal linking before approving for upload. Address any feedback within 48 hours.</div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-left"><div class="step-dot">6</div></div>
+        <div class="step-content">
+          <div class="step-title">Revisions & Final Approval (Week 3–4)</div>
+          <div class="step-desc">Implement any revisions requested by the On-Page SEO team. Once approved, the On-Page team handles upload to the CMS. Content writers do not publish directly to client websites. Mark tasks complete in ClickUp / Asana.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. TOOLS -->
+  <div class="section" id="tools">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2 class="section-title">Tools & Tech Stack</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-emoji">📄</div>
+        <div class="tool-name">Google Docs</div>
+        <div class="tool-purpose">Content drafting, collaboration, and delivery</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🤖</div>
+        <div class="tool-name">ChatGPT</div>
+        <div class="tool-purpose">AI-assisted drafting, outlines, and meta data</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">Ahrefs / SEMrush</div>
+        <div class="tool-purpose">Keyword research, competitor analysis, search volume</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔍</div>
+        <div class="tool-name">Google Search</div>
+        <div class="tool-purpose">SERP analysis and People Also Ask research</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📋</div>
+        <div class="tool-name">ClickUp / Asana</div>
+        <div class="tool-purpose">Monthly task tracking and brief management</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔎</div>
+        <div class="tool-name">Google Search Console</div>
+        <div class="tool-purpose">Performance data for content refresh decisions</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">📚</div>
+        <div class="tool-name">Authoritative Sources</div>
+        <div class="tool-purpose">Health Canada, CDA, NHS, PubMed for fact-checking</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🎬</div>
+        <div class="tool-name">Loom</div>
+        <div class="tool-purpose">Video walkthroughs for complex revision feedback</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ESCALATION -->
+  <div class="section" id="escalation">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2 class="section-title">Escalation Protocol</h2>
+    </div>
+    <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.95rem;">Content writers own the writing. Everything else — SEO decisions, publishing, client feedback — goes through the right team.</p>
+    <div class="escalation-grid">
+      <div class="esc-row">
+        <div class="esc-issue">Keyword or brief is unclear or contradictory</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Medical claim cannot be verified or sourced</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team Lead</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client requests custom tone or brand voice changes</div>
+        <span class="esc-badge badge-am">Account Manager</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Client complains about published content quality</div>
+        <span class="esc-badge badge-am">Account Manager</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Location page needs map embed or schema added</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">GBP post copy needed for a client</div>
+        <span class="esc-badge badge-local">Local SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Content requires publishing or CMS upload</div>
+        <span class="esc-badge badge-onpage">On-Page SEO Team</span>
+      </div>
+      <div class="esc-row">
+        <div class="esc-issue">Deadline cannot be met due to workload</div>
+        <span class="esc-badge badge-am">Account Manager + Team Lead</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <strong>Wisevu</strong> &nbsp;·&nbsp; Content Department — Internal Reference Document
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0s';
+        entry.target.style.opacity = '1';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => { s.style.opacity = '0'; observer.observe(s); });
+</script>
+</body>
+</html>
