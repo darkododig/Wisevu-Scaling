@@ -41,8 +41,7 @@
     justify-content: space-between;
     box-shadow: 0 2px 20px rgba(26,58,107,0.4);
   }
-  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); }
-  .nav-logo span { color: var(--accent); }
+  .nav-logo img { height: 32px; width: auto; filter: brightness(0) invert(1); display: block; }
   .nav-tag {
     font-size: 0.75rem;
     color: rgba(255,255,255,0.5);
@@ -195,10 +194,16 @@
     border-radius: 50%;
   }
 
-  .color-blue   { background: linear-gradient(135deg, var(--blue-deep), var(--blue)); }
-  .color-green  { background: linear-gradient(135deg, #1a4d3a, #2a7a5a); }
-  .color-purple { background: linear-gradient(135deg, #2d1b69, #6d28d9); }
-  .color-orange { background: linear-gradient(135deg, #7c2d12, #c2410c); }
+  /* Google brand colors — flat matte */
+  .color-blue   { background: #1976d2; }
+  .color-green  { background: #6ebc6b; }
+  .color-purple { background: #ff571f; }
+  .color-orange { background: #ffc107; }
+  .color-indigo { background: #98c0e3; }
+  .color-orange .dept-icon { background: rgba(0,0,0,0.1); }
+  .color-orange h2, .color-orange p { color: rgba(0,0,0,0.8) !important; }
+  .color-indigo h2, .color-indigo p { color: rgba(0,0,0,0.75) !important; }
+  .color-indigo .dept-icon { background: rgba(0,0,0,0.08); }
 
   .dept-icon {
     width: 56px; height: 56px;
@@ -343,7 +348,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">wise<span>vu</span></div>
+  <div class="nav-logo"><img src="https://www.wisevu.com/images/wisevu-internet-marketing-logo.svg" alt="Wisevu"></div>
   <div class="nav-tag">Internal Operations</div>
 </nav>
 
@@ -351,8 +356,8 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-label">Agency Scaling Playbook</div>
-    <h1>How <em>Wisevu</em><br>Operates at Scale</h1>
-    <p>Department-by-department structure, responsibilities, and deliverables — built for 100 to 400+ clients.</p>
+    <h1>How Wisevu SEO<br><em>Operates at Scale</em></h1>
+    <p>Department-by-department structure, responsibilities, and deliverables.<br>Built for 100+ clients.</p>
     <div class="hero-stats">
       <div class="stat">
         <div class="stat-num">5</div>
@@ -379,7 +384,7 @@
 
   <div class="dept-grid">
 
-    <!-- On-Page SEO -->
+    <!-- On-Page SEO — Google Blue -->
     <a href="onpage-seo-department.html" class="dept-card">
       <div class="dept-card-top color-blue">
         <div class="dept-icon">🔍</div>
