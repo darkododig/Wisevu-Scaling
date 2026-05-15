@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical SEO Fixes — Wisevu Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #487ab9;
+    --blue-dark: #2d5a96;
+    --blue-deep: #1a3a6b;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c5d8f5;
+    --off-white: #f7f9fc;
+    --gray-light: #eef2f8;
+    --gray: #8899b4;
+    --text: #1a2540;
+    --text-muted: #5a6a84;
+    --accent: #f0a500;
+    --white: #fff;
+    --critical: #dc2626;
+    --critical-light: #fef2f2;
+    --important: #d97706;
+    --important-light: #fffbeb;
+    --low: #2563eb;
+    --low-light: #eff6ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.65; font-size: 16px; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--blue-deep); padding: 18px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.4);
+  }
+  .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; font-style: italic; color: white; letter-spacing: 0.05em; }
+  .nav-back { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .nav-back:hover { color: white; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 60%, #6fa0d8 100%);
+    padding: 72px 48px 64px; position: relative; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-label { display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: white; line-height: 1.15; margin-bottom: 14px; }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.7); }
+  .hero p { font-size: 1rem; color: rgba(255,255,255,0.75); max-width: 580px; font-weight: 300; margin-bottom: 32px; }
+  .hero-pills { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pill { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 18px; }
+  .pill-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .pill-dot.critical { background: #f87171; }
+  .pill-dot.important { background: #fbbf24; }
+  .pill-dot.low { background: #60a5fa; }
+  .pill span { font-size: 0.82rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 56px 32px 80px; }
+
+  /* ── PRIORITY LEGEND ── */
+  .legend { display: flex; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 8px; background: white; border-radius: 8px; padding: 10px 16px; border: 1px solid var(--blue-mid); font-size: 0.84rem; font-weight: 600; box-shadow: 0 1px 6px rgba(72,122,185,0.07); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-dot.c { background: var(--critical); }
+  .legend-dot.i { background: var(--important); }
+  .legend-dot.l { background: var(--low); }
+
+  /* ── CATEGORY ── */
+  .category { margin-bottom: 40px; background: white; border-radius: 16px; border: 1px solid var(--blue-mid); overflow: hidden; box-shadow: 0 2px 16px rgba(72,122,185,0.07); }
+  .category-header { background: var(--blue-deep); padding: 18px 28px; display: flex; align-items: center; gap: 14px; }
+  .category-icon { font-size: 1.3rem; width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .category-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: white; }
+  .fix-list { list-style: none; }
+  .fix-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 28px; border-bottom: 1px solid var(--gray-light); transition: background 0.15s; }
+  .fix-item:last-child { border-bottom: none; }
+  .fix-item:hover { background: var(--blue-light); }
+  .priority-badge { flex-shrink: 0; margin-top: 2px; width: 10px; height: 10px; border-radius: 50%; }
+  .priority-badge.c { background: var(--critical); box-shadow: 0 0 0 3px rgba(220,38,38,0.15); }
+  .priority-badge.i { background: var(--important); box-shadow: 0 0 0 3px rgba(217,119,6,0.15); }
+  .priority-badge.l { background: var(--low); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+  .fix-text { flex: 1; }
+  .fix-title { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .fix-detail { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+  .fix-tag { flex-shrink: 0; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+  .fix-tag.c { background: var(--critical-light); color: var(--critical); }
+  .fix-tag.i { background: var(--important-light); color: var(--important); }
+  .fix-tag.l { background: var(--low-light); color: var(--low); }
+
+  /* ── MONTHLY STRUCTURE ── */
+  .monthly-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+  .month-card { background: white; border-radius: 14px; border: 1px solid var(--blue-mid); overflow: hidden; box-shadow: 0 2px 14px rgba(72,122,185,0.07); }
+  .month-header { padding: 18px 22px; }
+  .month-header.critical-hdr { background: var(--critical); }
+  .month-header.important-hdr { background: var(--important); }
+  .month-header.low-hdr { background: var(--low); }
+  .month-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+  .month-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: white; }
+  .month-body { padding: 18px 22px; }
+  .month-body ul { list-style: none; }
+  .month-body ul li { font-size: 0.84rem; color: var(--text-muted); padding: 6px 0 6px 18px; border-bottom: 1px solid var(--gray-light); position: relative; line-height: 1.45; }
+  .month-body ul li:last-child { border-bottom: none; }
+  .month-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 0.75rem; font-weight: 700; }
+
+  /* ── QUARTERLY NOTE ── */
+  .quarterly-note { background: var(--blue-deep); border-radius: 14px; padding: 24px 28px; display: flex; gap: 16px; align-items: flex-start; margin-bottom: 40px; }
+  .quarterly-note .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .quarterly-note h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: white; margin-bottom: 6px; }
+  .quarterly-note p { font-size: 0.88rem; color: rgba(255,255,255,0.72); line-height: 1.65; }
+
+  /* ── SECTION TITLE ── */
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .section-num { width: 40px; height: 40px; background: var(--blue); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 1.1rem; flex-shrink: 0; box-shadow: 0 4px 14px rgba(72,122,185,0.35); }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--blue-deep); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--blue-deep); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 32px; font-size: 0.82rem; margin-top: 80px; }
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  .section { margin-bottom: 56px; animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 52px 20px 44px; }
+    .page { padding: 36px 20px 60px; }
+    .monthly-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">WV</div>
+  <a href="onpage-seo-department.html" class="nav-back">← Back to On-Page SEO</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Internal Reference — SEO Team Only</div>
+    <h1>Technical SEO<br><em>Fixes Master List</em></h1>
+    <p>Full prioritized list of all technical SEO fixes. Quarterly audit surfaces all issues — fixes are worked through monthly by priority level.</p>
+    <div class="hero-pills">
+      <div class="pill"><div class="pill-dot critical"></div><span>Critical — Fix first</span></div>
+      <div class="pill"><div class="pill-dot important"></div><span>Important — Fix second</span></div>
+      <div class="pill"><div class="pill-dot low"></div><span>Low Priority — Fix third</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- QUARTERLY NOTE -->
+  <div class="quarterly-note">
+    <div class="icon">📅</div>
+    <div>
+      <h3>How This Works</h3>
+      <p>A full site crawl is run once per quarter using Screaming Frog. All issues found are logged and prioritized into three tiers. Fixes are distributed across the three months of the quarter — critical issues in Month 1, important issues in Month 2, and low priority in Month 3. The SEO does not fix everything at once — the monthly allocation is determined by the client's program (Thrive, Ascend, or Embark).</p>
+    </div>
+  </div>
+
+  <!-- SECTION 1: MONTHLY STRUCTURE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">Monthly Fix Structure</h2>
+    </div>
+    <div class="monthly-grid">
+      <div class="month-card">
+        <div class="month-header critical-hdr">
+          <div class="month-label">Month 1</div>
+          <div class="month-title">Critical Fixes</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Broken internal links (4xx)</li>
+            <li>Noindex / canonical errors</li>
+            <li>Crawl-blocking robots.txt issues</li>
+            <li>Missing title tags</li>
+            <li>SSL / HTTPS mixed content</li>
+            <li>GSC manual penalty notices</li>
+            <li>GA tracking missing from pages</li>
+          </ul>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-header important-hdr">
+          <div class="month-label">Month 2</div>
+          <div class="month-title">Important Fixes</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Redirect chains &amp; loops</li>
+            <li>Duplicate content &amp; meta issues</li>
+            <li>XML sitemap cleanup</li>
+            <li>Schema markup errors</li>
+            <li>Mobile usability errors</li>
+            <li>Core Web Vitals escalations</li>
+            <li>Orphaned pages</li>
+            <li>GSC crawl coverage warnings</li>
+          </ul>
+        </div>
+      </div>
+      <div class="month-card">
+        <div class="month-header low-hdr">
+          <div class="month-label">Month 3</div>
+          <div class="month-title">Low Priority + Handoffs</div>
+        </div>
+        <div class="month-body">
+          <ul>
+            <li>Thin content flags → Content team</li>
+            <li>Image alt text &amp; compression</li>
+            <li>Crawl budget cleanup</li>
+            <li>Keyword cannibalization flags</li>
+            <li>Open Graph / social tags</li>
+            <li>Outbound link attributes</li>
+            <li>Local SEO technical checks</li>
+            <li>Re-crawl prep for next quarter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: FULL MASTER LIST -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Full Fix Master List</h2>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot c"></div> Critical — Month 1</div>
+      <div class="legend-item"><div class="legend-dot i"></div> Important — Month 2</div>
+      <div class="legend-item"><div class="legend-dot l"></div> Low Priority — Month 3</div>
+    </div>
+
+    <!-- Broken Links -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🔗</div>
+        <h2>Broken Links</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix up to 10 broken internal links</div><div class="fix-detail">Update URL or add a 301 redirect to the correct destination</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 5 broken external links</div><div class="fix-detail">Remove or replace with a working, relevant URL</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Indexation -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">📑</div>
+        <h2>Indexation Issues</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Resolve up to 5 noindex tag errors</div><div class="fix-detail">Remove or correct unintentional noindex tags on pages that should be indexed</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix up to 3 canonical tag errors</div><div class="fix-detail">Set the correct canonical URL to prevent duplicate content signals</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Resolve up to 3 blocked pages in robots.txt</div><div class="fix-detail">Unblock pages that should be crawled, or confirm blocks are intentional</div></div><span class="fix-tag c">Critical</span></li>
+      </ul>
+    </div>
+
+    <!-- Redirect Issues -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">↪️</div>
+        <h2>Redirect Issues</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Clean up to 5 redirect chains</div><div class="fix-detail">Collapse multi-hop redirects into a single 301 to preserve link equity</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 3 redirect loops</div><div class="fix-detail">Identify pages redirecting to each other and break the loop</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Duplicate Content -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">📋</div>
+        <h2>Duplicate Content</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Resolve up to 3 duplicate page issues</div><div class="fix-detail">Set canonical, consolidate pages, or redirect as appropriate</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 3 duplicate title tag issues</div><div class="fix-detail">Rewrite title tags to be unique across all pages</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 3 duplicate meta description issues</div><div class="fix-detail">Rewrite meta descriptions to be unique across all pages</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Sitemap & Robots.txt -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🗺️</div>
+        <h2>Sitemap & Robots.txt</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix any robots.txt syntax errors</div><div class="fix-detail">Confirm Googlebot is not accidentally blocked — critical if it is</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Remove up to 5 404 or redirected URLs from XML sitemap</div><div class="fix-detail">Sitemap should only contain canonical, indexable 200-status pages</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Add up to 5 missing important pages to XML sitemap</div><div class="fix-detail">Ensure all key service, location, and blog pages are included</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Title Tags & Meta -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🏷️</div>
+        <h2>Title Tags & Meta</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix up to 5 missing title tags</div><div class="fix-detail">Every indexable page must have a unique, keyword-optimized title tag</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix up to 5 missing meta descriptions</div><div class="fix-detail">Write unique meta descriptions for pages missing them</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 3 title tags outside 30–60 character range</div><div class="fix-detail">Rewrite titles that are too short (weak) or too long (truncated in SERPs)</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Schema Markup -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">⚙️</div>
+        <h2>Schema Markup</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 3 schema errors flagged in GSC</div><div class="fix-detail">Resolve invalid or incomplete structured data flagged in Google Search Console</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Add missing LocalBusiness schema</div><div class="fix-detail">Ensure all location and contact pages have correct LocalBusiness structured data</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Fix up to 3 invalid schema implementations</div><div class="fix-detail">Validate using Google Rich Results Test and correct any errors</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Core Web Vitals -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">⚡</div>
+        <h2>Core Web Vitals & Page Speed</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Flag up to 5 pages with poor LCP, INP, or CLS scores</div><div class="fix-detail">Create developer escalation ticket with page URL, failing metric, and recommended fix</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify previously flagged CWV issues are resolved</div><div class="fix-detail">Re-test pages after developer fixes and confirm scores have improved</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag up to 5 oversized images for compression</div><div class="fix-detail">Escalate to developer or content team for compression and format conversion</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- Mobile Usability -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">📱</div>
+        <h2>Mobile Usability</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Flag up to 3 mobile usability errors in GSC</div><div class="fix-detail">Tap target sizing, viewport issues, content wider than screen — escalate to developer</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify previously flagged mobile issues are resolved</div><div class="fix-detail">Re-test after developer fixes and confirm in GSC</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Internal Linking -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🔀</div>
+        <h2>Internal Linking Structure</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Identify up to 5 orphaned pages</div><div class="fix-detail">Pages with no internal links pointing to them — add contextual links from relevant pages</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Identify up to 3 pages with only one internal link</div><div class="fix-detail">Flag for the On-Page SEO update task to add additional internal links</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- GSC Alerts -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🔍</div>
+        <h2>Google Search Console Alerts</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Review and action any manual penalty notices</div><div class="fix-detail">Manual actions require immediate attention and escalation to team lead</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Resolve up to 3 crawl anomalies or coverage warnings</div><div class="fix-detail">Address submitted URLs marked as noindex, excluded, or discovered but not indexed</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Submit updated sitemap if significant changes were made</div><div class="fix-detail">Resubmit via GSC after major content additions or structural changes</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- HTTPS & Security -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🔒</div>
+        <h2>HTTPS & Security</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Flag any HTTP pages that should be HTTPS</div><div class="fix-detail">Mixed content warnings — escalate to developer immediately</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix up to 3 mixed content warnings</div><div class="fix-detail">Insecure resources (images, scripts) loading on secure pages</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Verify SSL certificate is valid and not expiring within 30 days</div><div class="fix-detail">Alert client and developer immediately if expiry is imminent</div></div><span class="fix-tag c">Critical</span></li>
+      </ul>
+    </div>
+
+    <!-- Image Optimization -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🖼️</div>
+        <h2>Image Optimization</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Fix up to 10 missing image alt text attributes</div><div class="fix-detail">Add descriptive, keyword-relevant alt text to images missing it</div></div><span class="fix-tag l">Low</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag up to 5 oversized images for compression</div><div class="fix-detail">Escalate to developer or content team for compression or WebP conversion</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- Keyword Cannibalization -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">⚔️</div>
+        <h2>Keyword Cannibalization</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Identify up to 3 cases of keyword cannibalization</div><div class="fix-detail">Two or more pages competing for the same keyword — recommend consolidation, redirect, or differentiation</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- Crawl Budget -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🤖</div>
+        <h2>Crawl Budget</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Review crawl stats in GSC for crawl budget waste</div><div class="fix-detail">Check if Googlebot is crawling low-value pages (tag pages, filtered URLs, thank-you pages)</div></div><span class="fix-tag l">Low</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Noindex up to 5 low-value pages consuming crawl budget</div><div class="fix-detail">Tag pages, parameter URLs, pagination, thank-you pages — confirm with team lead before noindexing</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- E-E-A-T -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🏥</div>
+        <h2>E-E-A-T Signals (Healthcare Clients)</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify author bylines are present on blog posts</div><div class="fix-detail">Google expects content authored by credible, named individuals for YMYL sites</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Confirm About, Contact, and Privacy Policy pages are present and indexed</div><div class="fix-detail">These are trust signals for Google on healthcare and professional service sites</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag pages making medical claims without proper attribution</div><div class="fix-detail">Refer to content team for review and disclaimer addition</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- Analytics & Tracking -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">📊</div>
+        <h2>Analytics & Tracking</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Verify GA and GSC are installed and tracking on all pages</div><div class="fix-detail">Flag any pages where tracking code is missing — escalate to developer</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Check for duplicate GA tags causing inflated session data</div><div class="fix-detail">Multiple GA instances fire on the same page — escalate to developer to remove duplicate</div></div><span class="fix-tag i">Important</span></li>
+      </ul>
+    </div>
+
+    <!-- Local SEO Technical -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">📍</div>
+        <h2>Local SEO Technical</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify NAP is consistent and crawlable on all location pages</div><div class="fix-detail">Name, Address, Phone must match GBP and citations exactly — flag discrepancies to Local SEO team</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Check Google Maps embed is present on contact and location pages</div><div class="fix-detail">Escalate to developer if missing</div></div><span class="fix-tag l">Low</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Ensure location pages are not accidentally blocked from indexing</div><div class="fix-detail">Check robots.txt and noindex tags on all location and service area pages</div></div><span class="fix-tag c">Critical</span></li>
+      </ul>
+    </div>
+
+    <!-- Open Graph & Social -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">📣</div>
+        <h2>Open Graph & Social Tags</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Verify OG title, description, and image are set on key pages</div><div class="fix-detail">Homepage, service pages, and blog posts should all have complete Open Graph tags</div></div><span class="fix-tag l">Low</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Fix up to 3 missing or broken OG image tags</div><div class="fix-detail">Missing OG images result in poor-looking social shares — escalate to developer</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+    <!-- Outbound Links -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">↗️</div>
+        <h2>Outbound Links</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Ensure sponsored/affiliate outbound links have rel="nofollow" or rel="sponsored"</div><div class="fix-detail">Flag up to 5 outbound links missing proper attributes — Google may penalize undisclosed paid links</div></div><span class="fix-tag l">Low</span></li>
+      </ul>
+    </div>
+
+  </div><!-- /section -->
+
+</div><!-- /page -->
+
+<footer>
+  <strong>Wisevu</strong> &nbsp;·&nbsp; Technical SEO Fixes — Internal Reference — SEO Team Only
+</footer>
+
+<script>
+  const cats = document.querySelectorAll('.category');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  cats.forEach(c => {
+    c.style.opacity = '0';
+    c.style.transform = 'translateY(16px)';
+    c.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    observer.observe(c);
+  });
+</script>
+</body>
+</html>
