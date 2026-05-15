@@ -202,9 +202,9 @@
             <li>XML sitemap cleanup</li>
             <li>Schema markup errors</li>
             <li>Mobile usability errors</li>
-            <li>Core Web Vitals escalations</li>
             <li>Orphaned pages</li>
             <li>GSC crawl coverage warnings</li>
+            <li>E-E-A-T signals (healthcare clients)</li>
           </ul>
         </div>
       </div>
@@ -215,14 +215,13 @@
         </div>
         <div class="month-body">
           <ul>
-            <li>Thin content flags → Content team</li>
+            <li>Thin content flags → add to content calendar for future refresh</li>
             <li>Image alt text &amp; compression</li>
             <li>Crawl budget cleanup</li>
             <li>Keyword cannibalization flags</li>
             <li>Open Graph / social tags</li>
-            <li>Outbound link attributes</li>
             <li>Local SEO technical checks</li>
-            <li>Re-crawl prep for next quarter</li>
+            <li>Note: document all fixes completed this quarter so progress can be compared at next crawl</li>
           </ul>
         </div>
       </div>
@@ -264,6 +263,19 @@
         <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Resolve up to 5 noindex tag errors</div><div class="fix-detail">Remove or correct unintentional noindex tags on pages that should be indexed</div></div><span class="fix-tag c">Critical</span></li>
         <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Fix up to 3 canonical tag errors</div><div class="fix-detail">Set the correct canonical URL to prevent duplicate content signals</div></div><span class="fix-tag c">Critical</span></li>
         <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Resolve up to 3 blocked pages in robots.txt</div><div class="fix-detail">Unblock pages that should be crawled, or confirm blocks are intentional</div></div><span class="fix-tag c">Critical</span></li>
+      </ul>
+    </div>
+
+    <!-- E-E-A-T (moved to 3rd) -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">🏥</div>
+        <h2>E-E-A-T Signals (Healthcare Clients)</h2>
+      </div>
+      <ul class="fix-list">
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify author bylines are present on blog posts</div><div class="fix-detail">Google expects content authored by credible, named individuals for YMYL sites</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Confirm About, Contact, and Privacy Policy pages are present and indexed</div><div class="fix-detail">These are trust signals for Google on healthcare and professional service sites</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag pages making medical claims without proper attribution</div><div class="fix-detail">Add to content calendar for disclaimer addition during next content refresh</div></div><span class="fix-tag l">Low</span></li>
       </ul>
     </div>
 
@@ -338,9 +350,8 @@
         <h2>Core Web Vitals & Page Speed</h2>
       </div>
       <ul class="fix-list">
-        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Flag up to 5 pages with poor LCP, INP, or CLS scores</div><div class="fix-detail">Create developer escalation ticket with page URL, failing metric, and recommended fix</div></div><span class="fix-tag i">Important</span></li>
-        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify previously flagged CWV issues are resolved</div><div class="fix-detail">Re-test pages after developer fixes and confirm scores have improved</div></div><span class="fix-tag i">Important</span></li>
-        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag up to 5 oversized images for compression</div><div class="fix-detail">Escalate to developer or content team for compression and format conversion</div></div><span class="fix-tag l">Low</span></li>
+        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Flag up to 5 pages with poor LCP, INP, or CLS scores</div><div class="fix-detail">Log the page URL and failing metric in the master sheet so it can be addressed in a future on-page SEO update</div></div><span class="fix-tag i">Important</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag up to 5 oversized images for compression</div><div class="fix-detail">Log in master sheet for developer or content team to action</div></div><span class="fix-tag l">Low</span></li>
       </ul>
     </div>
 
@@ -375,7 +386,7 @@
         <h2>Google Search Console Alerts</h2>
       </div>
       <ul class="fix-list">
-        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Review and action any manual penalty notices</div><div class="fix-detail">Manual actions require immediate attention and escalation to team lead</div></div><span class="fix-tag c">Critical</span></li>
+        <li class="fix-item"><div class="priority-badge c"></div><div class="fix-text"><div class="fix-title">Check GSC for manual penalty notices</div><div class="fix-detail">No action required unless a penalty is found — if one exists, escalate to team lead immediately</div></div><span class="fix-tag c">Critical</span></li>
         <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Resolve up to 3 crawl anomalies or coverage warnings</div><div class="fix-detail">Address submitted URLs marked as noindex, excluded, or discovered but not indexed</div></div><span class="fix-tag i">Important</span></li>
         <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Submit updated sitemap if significant changes were made</div><div class="fix-detail">Resubmit via GSC after major content additions or structural changes</div></div><span class="fix-tag l">Low</span></li>
       </ul>
@@ -402,7 +413,7 @@
       </div>
       <ul class="fix-list">
         <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Fix up to 10 missing image alt text attributes</div><div class="fix-detail">Add descriptive, keyword-relevant alt text to images missing it</div></div><span class="fix-tag l">Low</span></li>
-        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag up to 5 oversized images for compression</div><div class="fix-detail">Escalate to developer or content team for compression or WebP conversion</div></div><span class="fix-tag l">Low</span></li>
+        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag up to 5 oversized images for compression</div><div class="fix-detail">Log in master sheet for developer or content team to action — do not fix directly</div></div><span class="fix-tag l">Low</span></li>
       </ul>
     </div>
 
@@ -426,19 +437,6 @@
       <ul class="fix-list">
         <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Review crawl stats in GSC for crawl budget waste</div><div class="fix-detail">Check if Googlebot is crawling low-value pages (tag pages, filtered URLs, thank-you pages)</div></div><span class="fix-tag l">Low</span></li>
         <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Noindex up to 5 low-value pages consuming crawl budget</div><div class="fix-detail">Tag pages, parameter URLs, pagination, thank-you pages — confirm with team lead before noindexing</div></div><span class="fix-tag l">Low</span></li>
-      </ul>
-    </div>
-
-    <!-- E-E-A-T -->
-    <div class="category">
-      <div class="category-header">
-        <div class="category-icon">🏥</div>
-        <h2>E-E-A-T Signals (Healthcare Clients)</h2>
-      </div>
-      <ul class="fix-list">
-        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Verify author bylines are present on blog posts</div><div class="fix-detail">Google expects content authored by credible, named individuals for YMYL sites</div></div><span class="fix-tag i">Important</span></li>
-        <li class="fix-item"><div class="priority-badge i"></div><div class="fix-text"><div class="fix-title">Confirm About, Contact, and Privacy Policy pages are present and indexed</div><div class="fix-detail">These are trust signals for Google on healthcare and professional service sites</div></div><span class="fix-tag i">Important</span></li>
-        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Flag pages making medical claims without proper attribution</div><div class="fix-detail">Refer to content team for review and disclaimer addition</div></div><span class="fix-tag l">Low</span></li>
       </ul>
     </div>
 
@@ -476,17 +474,6 @@
       <ul class="fix-list">
         <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Verify OG title, description, and image are set on key pages</div><div class="fix-detail">Homepage, service pages, and blog posts should all have complete Open Graph tags</div></div><span class="fix-tag l">Low</span></li>
         <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Fix up to 3 missing or broken OG image tags</div><div class="fix-detail">Missing OG images result in poor-looking social shares — escalate to developer</div></div><span class="fix-tag l">Low</span></li>
-      </ul>
-    </div>
-
-    <!-- Outbound Links -->
-    <div class="category">
-      <div class="category-header">
-        <div class="category-icon">↗️</div>
-        <h2>Outbound Links</h2>
-      </div>
-      <ul class="fix-list">
-        <li class="fix-item"><div class="priority-badge l"></div><div class="fix-text"><div class="fix-title">Ensure sponsored/affiliate outbound links have rel="nofollow" or rel="sponsored"</div><div class="fix-detail">Flag up to 5 outbound links missing proper attributes — Google may penalize undisclosed paid links</div></div><span class="fix-tag l">Low</span></li>
       </ul>
     </div>
 
